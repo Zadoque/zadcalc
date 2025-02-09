@@ -16,6 +16,9 @@ const compute = (numbers, operation) => {
         default:
             console.log('deu merda e nem sei como');
     }
+    if(result >= 0){
+        return `+${result}`;
+    }
     return result;
 }
 
