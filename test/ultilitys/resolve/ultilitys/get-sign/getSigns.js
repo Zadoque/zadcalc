@@ -4,7 +4,7 @@ const checkNumber2Sign =  require('./ultilitys/checkNumber2Sign');
  * 
  * @param {String} str - The string that has the operation.
  * @param {Number} index  - The index of that operation.
- * @returns An array with the signs of the numbers [boolean, boolean]. when, true is positive, false is negative
+ * @returns {Array} An array with the signs of the numbers ['','']. when, they can be '+' or '-'
  */
 const getSings = (str, index) => {
     let signs = [];
