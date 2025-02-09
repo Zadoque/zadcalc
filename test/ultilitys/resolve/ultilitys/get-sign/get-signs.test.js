@@ -1,4 +1,4 @@
-const getSigns =  require('./getSigns.js')
+const getSigns =  require('./get-signs.js')
 let test1 = ['+', '-'];
 let test2 = ['+', '+'];
 7-2+6*3

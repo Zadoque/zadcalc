@@ -1,4 +1,4 @@
-const getNumbers = require('./getNumbers.js');
+const getNumbers = require('./get-numbers.js');
 let info = {
     indexs : [1,3],
     numbers: ['6','3']

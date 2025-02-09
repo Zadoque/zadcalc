@@ -1,5 +1,5 @@
-const checkNumber1Sign =  require('./ultilitys/checkNumber1Sign');
-const checkNumber2Sign =  require('./ultilitys/checkNumber2Sign');
+const checkNumber1Sign =  require('./ultilitys/check-number-1-sign');
+const checkNumber2Sign =  require('./ultilitys/check-number-2-sign');
 /**
  * 
  * @param {String} str - The string that has the operation.

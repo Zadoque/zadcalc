@@ -1,5 +1,5 @@
-const getNumbers = require('./ultilitys/getNumbers/getNumbers');
-const getSings = require('./ultilitys/get-sign/getSigns');
+const getNumbers = require('./ultilitys/get-numbers/get-numbers');
+const getSings = require('./ultilitys/get-sign/get-signs');
 /**
  * 
  * @param {String} expression - A sting of a numerical expression withouth parentheses 
