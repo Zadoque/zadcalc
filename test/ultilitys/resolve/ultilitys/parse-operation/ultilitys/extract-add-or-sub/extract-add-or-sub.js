@@ -10,7 +10,6 @@
  */
 const extractAddOrSub = (expression) =>{
     let op_str = expression.match(/[\-\+]?[0-9]+(\.[0-9]+)?[\+\-]{1}[\-\+]?[0-9]+(\.[0-9]+)?/);
-    console.log(expression);
     let info = {
         index_start: op_str.index,
     }
