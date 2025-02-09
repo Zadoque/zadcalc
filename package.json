@@ -1,0 +1,24 @@
+{
+  "name": "zadoque-math-resolver",
+  "version": "1.0.0",
+  "description": "Here is a Node package that recieves a expression as string and returns the result.",
+  "main": "/src/modules/main.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/modules/main.js"
+  },
+  "repository": {
+    "type": "module",
+    "url": "git+https://github.com/Zadoque/zadoque-math-resolver.git"
+  },
+  "keywords": [],
+  "author": "Zadoque Carneiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zadoque/zadoque-math-resolver/issues"
+  },
+  "homepage": "https://github.com/Zadoque/zadoque-math-resolver#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
