@@ -11,7 +11,7 @@ const extractMultiOrDiv = require('./ultilitys/extract-multi-or-div/extract-mult
  * }
  */
 const parseOperation = (expression) =>{
-    if(/[\*\/]/.test(expression)){
+    if(/[*/]/.test(expression)){
         return extractMultiOrDiv(expression);
     } 
     return extractAddOrSub(expression);

@@ -7,7 +7,7 @@ const getNumbers = (str, index) => {
         numbers[0] = `${numbers[0]}${str[indexs[0]]}`
     }
     let signs = getSigns(str,indexs[0], index);
-    if(/[\-\+]/.test(str[index + 1])){
+    if(/[-+]/.test(str[index + 1])){
         str = `${str.slice(0, index+1)}${str.slice(index + 2)}`;
     }
     while(/\d/.test(str[indexs[1] + 1])){

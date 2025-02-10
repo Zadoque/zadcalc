@@ -15,3 +15,6 @@ test("resolve3 '7-2+6*-3-55-3'must return '-71'",() => {
 test("resolve4 '11+3'must return '14'",() => {
     expect(resolve('11*-3')).toBe('-33');
 }); 
+test("resolve5 '11.7/0'must return '14'",() => {
+    expect(resolve('11.7/0')).toBe('Error! divisão por zero');
+}); 

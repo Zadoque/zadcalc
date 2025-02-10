@@ -11,12 +11,12 @@ const getSings = (str, index1, index2) => {
     if (index1 == 0){
         signs.push('+');
     } else{
-        if(/[\-]/.test(str[index1 - 1])){
+        if(/[-]/.test(str[index1 - 1])){
             signs.push('-');
         }
         else{signs.push('+')};
     }
-    if(/[\-]/.test(str[index2 + 1])){
+    if(/[-]/.test(str[index2 + 1])){
         signs.push('-');
     } else {
         signs.push('+');
