@@ -19,7 +19,7 @@ const simplifyCurlyBrack = (expression) => {
             info.resolve_str = simplifyParentheses(info.resolve_str);
         }
         let result = '';
-        if(/[-+/*]/.test(info.resolve_str.slice(1))){
+        if(/[\-\+\/\*]/.test(info.resolve_str.slice(1))){
             result = `${resolve(info.resolve_str)}`;
         }
         else{
