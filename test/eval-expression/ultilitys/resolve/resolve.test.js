@@ -27,7 +27,6 @@ test("resolve7 '556+728'must return '+1284'",() => {
     expect(resolve('556+728')).toBe('+1284');
 }); 
 
-'2+3*4-6/2+8-2'
 
 test("resolve8 ''2+3*4-6/2+8-2'must return '+17'",() => {
     expect(resolve('2+3*4-6/2+8-2')).toBe('+17');

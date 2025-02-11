@@ -24,7 +24,6 @@ test(`simplify '2+3*4-[6/2]+8-2' must return "2+3*4*-3+8-2"`, () => {
 
 
 
-
 test(`simplify '(2+3)*4-[6/2]+8-2' must return "+14"`, () => {
     expect(simplify('(2*3)*4-[6/2]+8-2')).toBe('+6*4-3+8-2');
 });
