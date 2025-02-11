@@ -16,3 +16,7 @@ test(` Get signs(7-2+6*3, 5) must return ${test2}`, () => {
 test(` Get signs('7-2+6*-3-55-3', 5) must return ${test1}`, () => {
     expect(getSigns('7-2+6*-3-55-3', 4,5)).toStrictEqual(test1);
 });
+
+test(` Get signs('11.7/1, 4,0) must return ${test2}`, () => {
+    expect(getSigns('11.7/1',0, 4)).toStrictEqual(test2);
+});

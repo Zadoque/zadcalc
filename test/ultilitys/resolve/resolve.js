@@ -1,4 +1,4 @@
-const getNumbers = require('./ultilitys/get-numbers/get-numbers')
+const getNumbers = require('./ultilitys/get-numbers/get-numbers');
 const parseOperation = require('./ultilitys/parse-operation/parse-operation');
 const compute = require('./ultilitys/compute/compute');
 
@@ -17,9 +17,6 @@ const resolve =  (expression) =>{
         }
         result = `${compute(numbers, info.sign)}`;
         expression = `${expression.slice(0, info.index_start)}${result}${expression.slice(info.index_end + 1)}`;
-    }
-    if(result[0] === '+'){
-        result = result.slice(1);
     }
     return result;
 }

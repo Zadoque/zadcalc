@@ -1,18 +1,25 @@
-const resolve = require('../resolve/resolve.js');
-const extractExpressionInside = require('./ultilitys/extract-expression-inside/extract-expression-inside.js');
-const updateExpression = require('./ultilitys/update-expression/update-expression.js')
+const simplifyParentheses = require('./ultilitys/simplify-parentheses/simplify-parentheses');
+const simplifySquareBrack = require('./ultilitys/simplify-square-brack/simplify-square-brack');
+const simplifyCurlyBrack = require('./ultilitys/simplify-curly-brack/simplify-curly-brack');
 /**
  * 
- * @param {String} expression - A sting of a numerical expression with parentheses, it can include '+', '-','*' or '/'
- * @returns {string} -The result of the string without parentheses
+ * @param {String} expression - An string that contains a valid numerical expression. It can contain: 
+ * '{}', '[]', '()', '+', '-', '+', '*', '/', ex: {-2[9.4/8.90]{6-4/(5-3)}-8}
+ *  * @returns 
  */
-const simplify = (expression) => {
-    while(expression.includes('(')){
-        let info =  extractExpressionInside(expression);
-        let result = `${resolve(info.resolve_str)}`;
-        expression = updateExpression(info.expression,result, info.indexs);
-    }
-    return expression;
 
+const simplify = (expression) => {
+    if(expression.includes('{')){
+        return simplifyCurlyBrack(expression);
+    } else if( expression.includes('[')){
+        return simplifySquareBrack(expression);
+    } else if(expression.includes('(')){
+        console.log(expression);
+        return simplifyParentheses(expression);
+    } else {
+        return expression;
+    }
 }
+
+
 module.exports = simplify;

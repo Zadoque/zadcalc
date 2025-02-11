@@ -12,9 +12,7 @@ const compute = (numbers, operation) => {
             break;
         case '/':
             result = numbers[0] / numbers[1];
-            break;
-        default:
-            console.log('deu merda e nem sei como');
+            break;    
     }
     if(result >= 0){
         return `+${result}`;

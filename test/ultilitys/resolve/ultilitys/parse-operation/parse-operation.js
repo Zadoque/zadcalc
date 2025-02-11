@@ -13,8 +13,12 @@ const extractMultiOrDiv = require('./ultilitys/extract-multi-or-div/extract-mult
 const parseOperation = (expression) =>{
     if(/[*/]/.test(expression)){
         return extractMultiOrDiv(expression);
-    } 
-    return extractAddOrSub(expression);
+    }
+    if(/[-+]/.test(expression.slice(1))){
+        return extractAddOrSub(expression);
+    }
+    return expression;
+    
 }
 
 module.exports = parseOperation;
