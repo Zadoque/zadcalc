@@ -1,5 +1,5 @@
 const extractExpressionInside = (expression)  => {
-    let parentheses_regex = /\(([-+*/]{0,2}[0-9]+(\.[0-9]+)?)+\)/;
+    let parentheses_regex = /\(([\-\+\*\/]{0,2}[0-9]+(\.[0-9]+)?)+\)/;
     let resolve_str = expression.match(parentheses_regex);
     let index_a = resolve_str.index;
     let index_b = resolve_str[0].length + index_a - 1;

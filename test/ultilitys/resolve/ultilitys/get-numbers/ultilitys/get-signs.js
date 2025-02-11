@@ -6,7 +6,7 @@
  * @param {Number} index2  - The index of  operation.
  * @returns {Array} An array with the signs of the numbers ['','']. when, they can be '+' or '-'
  */
-const getSings = (str, index1, index2) => {
+const getSigns = (str, index1, index2) => {
     let signs = [];
     if (index1 == 0){
         signs.push('+');
@@ -24,4 +24,4 @@ const getSings = (str, index1, index2) => {
     return signs;
 }
 
-module.exports = getSings;
+module.exports = getSigns;

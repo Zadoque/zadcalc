@@ -9,13 +9,14 @@ const compute = require('./ultilitys/compute/compute');
  */
 const resolve =  (expression) =>{
    let result = '';
-    while(/[+-/*]/.test(expression.slice(1))){
+    while(/[\+\-\/\*]/.test(expression.slice(1))){
         let info = parseOperation(expression);
         let numbers = getNumbers(expression, info.index_op);
         if(numbers[1] === 0 && info.sign === '/'){
             return 'Error! divisão por zero'
         }
         result = `${compute(numbers, info.sign)}`;
+
         expression = `${expression.slice(0, info.index_start)}${result}${expression.slice(info.index_end + 1)}`;
     }
     return result;

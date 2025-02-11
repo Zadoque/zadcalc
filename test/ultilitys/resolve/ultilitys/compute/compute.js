@@ -1,17 +1,17 @@
 const compute = (numbers, operation) => {
-    let result = 0;
+    let result = '';
     switch(operation){
         case '+':
-            result = numbers[0] + numbers[1];
+            result = `${numbers[0] + numbers[1]}`;
             break;
         case '-':
-            result = numbers[0] - numbers[1];
+            result = `${numbers[0] - numbers[1]}`;;
             break;
         case '*':
-            result = numbers[0] * numbers[1];
+            result = `${numbers[0] * numbers[1]}`;;
             break;
         case '/':
-            result = numbers[0] / numbers[1];
+            result = `${numbers[0] / numbers[1]}`;;
             break;    
     }
     if(result >= 0){

@@ -20,9 +20,9 @@ test("resolve5 '11.7/0'must return 'Error! divisão por zero'",() => {
 }); 
 
 test("resolve6 '11.7/1'must return '+11.7'",() => {
-    expect(resolve('11.7/1')).toBe('11.7');
+    expect(resolve('11.7/1')).toBe('+11.7');
 }); 
 
-test("resolve7 '556'must return '+11.7'",() => {
-    expect(resolve('11.7/1')).toBe('11.7');
+test("resolve7 '556+728'must return '+1284'",() => {
+    expect(resolve('556+728')).toBe('+1284');
 }); 
