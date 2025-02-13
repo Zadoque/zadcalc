@@ -2,7 +2,7 @@
   "name": "zadoque-math-resolver",
   "version": "1.0.0",
   "description": "Here is a Node package that recieves a expression as string and returns the result.",
-  "main": "/src/modules/main.js",
+  "main": "/src/main.js",
   "type": "commonjs",
   "scripts": {
     "test": "jest",

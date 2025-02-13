@@ -10,6 +10,7 @@ const extractMultiOrDiv = require('./ultilitys/extract-mult-or-div/extract-mult-
  *      @property {sign} - The operation itself, can be '*' or '/' or '+' or '-'
  * }
  */
+
 const parseOperation = (expression) =>{
     if(/[*/]/.test(expression)){
         return extractMultiOrDiv(expression);
