@@ -1,15 +1,28 @@
 const isValid = require('./ultilitys/is-valid/is-valid');
+const implicitMultiplication = require('./ultilitys/implicit-multiplication/implicit-multiplication');
+const removeUnnecessary = require('./ultilitys/remove-unnecessary/remove-unnecessary');
+const simplify = require('./ultilitys/simplify/simplify');
+const resolve = require('./ultilitys/resolve/resolve');
 const evalExpression = (expression) => {
-    return isValid(expression);
-    if(isValid(expression)){
-        console.log('nice');
-    }
+    if( isValid(expression)){
+        if(/[\{\(\[]/.test(expression)){
+            expression = implicitMultiplication(expression);
+            expression = removeUnnecessary(expression);
+            console.log(expression);
+            if(/[\{\(\[]/.test(expression)){
+                expression = simplify(expression);
+                expression = resolve(expression);
+            } else{
+                expression = resolve(expression);
+            }
+        } else {
+            expression = resolve(expression);
+        }
+        return expression;
 
- 
-    //verify if it's valid
- //resolve implicit multiplication
- //remove unnecessary (), [],{} if there is
- //resolve by simplifying first or solving it directly
+    } else {
+        return 'Sintax Error';
+    }
 }
 
 module.exports = evalExpression;

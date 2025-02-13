@@ -11,9 +11,6 @@ const updateExpression = (expression, result, indexs) => {
         }
         indexs[0]--;
     }
-    if(/[0-9\(\[\{]/g.test(expression[indexs[1] + 1])){
-        expression = `${expression.slice(0, indexs[1] + 1)}*${expression.slice(indexs[1] + 1)}`;
-    }
     return`${expression.slice(0,indexs[0])}${result}${expression.slice(indexs[1] + 1)}`;
 }
 

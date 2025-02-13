@@ -14,7 +14,7 @@ const isValid = (expression) => {
     if(expression.lenght <= 2){
         return false;
     }
-    if(/\s/.test(expression)){
+    if(/[^\d\-\+\*\/\{\[\(\)\]\}\.]/.test(expression)){
         return false;
     }
     if(expression.match(basic_invalid_regex)){

@@ -8,10 +8,9 @@ const change_container_false = (expression, indexs) => {
 }
 const hasItToRemove = (info) => {
     bool = false;
-    //console.log(info.before_and_after);
     if(/\{\}|\[\]|\(\)/.test(info.before_and_after)){
         bool = true;
-    } else if(/[\(\[\{\-\+][^\(\[\{\*\/\d]/.test(info.before_and_after) && !info.mult_and_div_inside){
+    } else if(/[\(\[\{\-\+][^\*\/]/.test(info.before_and_after) && !info.mult_and_div_inside){
         bool = true;
     } else if( /[^\/]./.test(info.before_and_after) && !info.add_and_sub_inside){
         bool = true;
@@ -41,10 +40,8 @@ const getUnnecessary = (expression) =>{
                 inside = `${inside.slice(sub_container.index + sub_container[0].length)}`;
             }
         }
-        //console.log(inside);
         let mult_and_div_inside = /[\/\*]|\d#/.test(inside.slice(2));
         let add_and_sub_inside = /[\-\+]/.test(inside.slice(2));
-        //console.log(`${mult_and_div_inside} and ${add_and_sub_inside}`);
         let before_and_after = `${expression_temp[indexs[0] - 1]}${expression_temp[indexs[1] + 1]}`;
         let info = {
             expression_temp: expression_temp,
