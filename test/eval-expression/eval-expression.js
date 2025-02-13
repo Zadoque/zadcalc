@@ -5,7 +5,9 @@ const evalExpression = (expression) => {
         console.log('nice');
     }
 
- //verify if it's valid
+ 
+    //verify if it's valid
+ //resolve implicit multiplication
  //remove unnecessary (), [],{} if there is
  //resolve by simplifying first or solving it directly
 }

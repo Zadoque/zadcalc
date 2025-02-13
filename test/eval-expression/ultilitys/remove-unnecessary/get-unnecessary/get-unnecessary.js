@@ -1,35 +1,64 @@
-const cutExpression = (expression, indexs) => {
-    expression = `${expression.slice(0,indexs[0])}${expression.slice(indexs[0]+1, indexs[1])}${expression.slice(indexs[1]+ 1)}`;
+const change_container_true= (expression, indexs) => {
+    expression = `${expression.slice(0,indexs[0])}!${expression.slice(indexs[0]+1, indexs[1])}@${expression.slice(indexs[1]+ 1)}`;
     return expression;
 }
+const change_container_false = (expression, indexs) => {
+    expression = `${expression.slice(0,indexs[0])}#${expression.slice(indexs[0]+1, indexs[1])}$${expression.slice(indexs[1]+ 1)}`;
+    return expression;
+}
+const hasItToRemove = (info) => {
+    bool = false;
+    //console.log(info.before_and_after);
+    if(/\{\}|\[\]|\(\)/.test(info.before_and_after)){
+        bool = true;
+    } else if(/[\(\[\{\-\+][^\(\[\{\*\/\d]/.test(info.before_and_after) && !info.mult_and_div_inside){
+        bool = true;
+    } else if( /[^\/]./.test(info.before_and_after) && !info.add_and_sub_inside){
+        bool = true;
+    }
+    return bool;
+}
+
 const getUnnecessary = (expression) =>{
-    let container_regex = /\{[^(\{\[\(]*\}|\[[^(\{\[\(]*\]|\([^(\{\[\(]*\)/;
+    let container_regex = /\{[^(\{\[\(\}]*\}|\[[^(\{\[\(\]]*\]|\([^(\{\[\(\)]*\)/;
+    let sub_container_regex = /#[^(#)]*\$/;
     let remove = [];
-    let count = 0;
     let expression_temp = expression;
-    for(let i = 0;i < 2; i++){
+    while(container_regex.test(expression_temp)){
         let container_str = expression_temp.match(container_regex);
         let indexs = [container_str.index, container_str.index  + container_str[0].length - 1];
-        console.log(indexs);
-        if((indexs[0] === 0) && (indexs[1] + count === (expression.length - 1))){
-            expression_temp = cutExpression(expression_temp, [0, expression_temp.length - 1]);
-            remove.push([0 ,expression.length - 1]);
-            
+        let inside = container_str[0];
+        if(container_str[0] === expression_temp){
+            remove.push(indexs[0]); 
+            remove.push(indexs[1]);
+            return remove;
         }
-        if(/[\-\+]/.test(expression[indexs[0] - 1 + count]) && /[^(\*\(\[\{\d)]/.test(expression[indexs[1] + 1 + count])){
-            expression_temp = cutExpression(expression_temp, indexs);
-            let original_indexs = indexs.map(number => number += count);
-            remove.push(original_indexs); 
-            count += 2;
-        } else if(/[\*\/]/.test(expression[indexs[0] - 1 + count])){
-            expression_temp = cutExpression(expression_temp, indexs);
-            
-        }else {
-            expression_temp = cutExpression(expression_temp, indexs);
-            count += 2;
+        if(sub_container_regex.test(container_str[0])){
+            let sub_container = inside.match(sub_container_regex);
+            if(sub_container.index > 0){
+                inside = `${inside.slice(0,sub_container.index + 1)}${inside.slice(sub_container.index + sub_container[0].length)}`;
+            } else {
+                inside = `${inside.slice(sub_container.index + sub_container[0].length)}`;
+            }
         }
-        
-         
+        //console.log(inside);
+        let mult_and_div_inside = /[\/\*]|\d#/.test(inside.slice(2));
+        let add_and_sub_inside = /[\-\+]/.test(inside.slice(2));
+        //console.log(`${mult_and_div_inside} and ${add_and_sub_inside}`);
+        let before_and_after = `${expression_temp[indexs[0] - 1]}${expression_temp[indexs[1] + 1]}`;
+        let info = {
+            expression_temp: expression_temp,
+            before_and_after: before_and_after,
+            mult_and_div_inside: mult_and_div_inside,
+            add_and_sub_inside: add_and_sub_inside
+        }
+        if(hasItToRemove(info)){
+            expression_temp = change_container_true(expression_temp, indexs);
+            remove.push(indexs[0]); 
+            remove.push(indexs[1]);
+        } else{
+            expression_temp = change_container_false(expression_temp, indexs);
+        }
     }
     return remove;
     
