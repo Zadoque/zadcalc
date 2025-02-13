@@ -8,7 +8,6 @@ const evalExpression = (expression) => {
         if(/[\{\(\[]/.test(expression)){
             expression = implicitMultiplication(expression);
             expression = removeUnnecessary(expression);
-            console.log(expression);
             if(/[\{\(\[]/.test(expression)){
                 expression = simplify(expression);
                 expression = resolve(expression);
