@@ -1,4 +1,4 @@
-const getUnnecessary = require('./get-unnecessary');
+const getUnnecessary = require('../../../../../src/eval-expression/ultilitys/remove-unnecessary/get-unnecessary/get-unnecessary');
 
 let remove1 = [5,9,0,10];
 let remove2 = [0,12];

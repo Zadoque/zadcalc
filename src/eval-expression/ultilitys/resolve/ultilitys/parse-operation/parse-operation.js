@@ -1,5 +1,5 @@
 const extractAddOrSub = require('./ultilitys/extract-add-or-sub/extract-add-or-sub');
-const extractMultiOrDiv = require('./ultilitys/extract-multi-or-div/extract-mult-or-div')
+const extractMultiOrDiv = require('./ultilitys/extract-mult-or-div/extract-mult-or-div')
 /**
  * 
  * @param {String} expression - A string that just contains '+' or '-' or '*' or '/'

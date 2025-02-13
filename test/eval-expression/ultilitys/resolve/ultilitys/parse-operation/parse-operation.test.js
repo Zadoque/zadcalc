@@ -1,4 +1,4 @@
-const parseOperation = require('./parse-operation')
+const parseOperation = require('../../../../../../src/eval-expression/ultilitys/resolve/ultilitys/parse-operation/parse-operation')
 let info1 = {
     index_start: 0,
     index_op: 6,

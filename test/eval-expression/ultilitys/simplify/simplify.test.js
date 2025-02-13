@@ -1,4 +1,4 @@
-const simplify = require('./simplify');
+const simplify = require('../../../../src/eval-expression/ultilitys/simplify/simplify');
 
 test(`simplifyParentheses (2+4)*8 must return 6`, () => {
     expect(simplify('(2+4)*8')).toBe('+6*8');

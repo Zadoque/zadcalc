@@ -1,4 +1,4 @@
-const getSigns =  require('./get-signs.js')
+const getSigns =  require('../../../../../../../src/eval-expression/ultilitys/resolve/ultilitys/get-numbers/ultilitys/get-signs')
 let test1 = ['+', '-'];
 let test2 = ['+', '+'];
 7-2+6*3

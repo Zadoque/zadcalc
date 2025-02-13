@@ -1,4 +1,4 @@
-const extractMultOrDiv = require('./extract-mult-or-div');
+const extractMultOrDiv = require('../../../../../../../../src/eval-expression/ultilitys/resolve/ultilitys/parse-operation/ultilitys/extract-mult-or-div/extract-mult-or-div');
 let info1 = {
     index_start: 11,
     index_op: 13,

@@ -1,4 +1,4 @@
-const compute = require('./compute');
+const compute = require('../../../../../../src/eval-expression/ultilitys/resolve/ultilitys/compute/compute');
 
 test('Compute([9,8],+) must return 17', () => {
     expect(compute([-9,-8],'+')).toBe('-17');
