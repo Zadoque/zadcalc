@@ -1,9 +1,9 @@
-const mdc = (a, b) =>{
+const mdcCalculate = (a, b) =>{
     if (!b) {
         return a;
     }
     
-    return mdc(b, a % b);
+    return mdcCalculate(b, a % b);
 };
 const isDizima = (decimal1) => {
     let decimal = decimal1;
@@ -36,16 +36,24 @@ const isDizima = (decimal1) => {
         decimal = decimal1.slice(j);
     }
     return info;
-}
+};
 
 const decimalToFrac = (decimal) => {
     let parts = decimal.split('.');
+    let fraction = '';
+    let bool = false;
+    if(/[\-\+]/.test(parts[0][0])){
+        parts[0] = parts[0].slice(1);
+        bool = true;
+    }
     if(parts[1].length >= 16 ){
         let info = isDizima(parts[1]);
         console.log(info);
         if(info.bool){
             let numerador = Number(`${parts[0]}${parts[1].slice(0,info.dizim)}${parts[1].slice(info.dizim, info.dizim + info.periodo )}`);
-            numerador -= Number(parts[0]);
+            console.log(numerador);
+            numerador -= Number(`${parts[0]}${parts[1].slice(0, info.dizim )}`);
+            console.log(numerador);
             let denominador = '';
             for(let i = 0; i < info.periodo; i++){
                 denominador += '9';
@@ -53,15 +61,20 @@ const decimalToFrac = (decimal) => {
             for(let i = 0; i < info.dizim; i++){
                 denominador += '0';
             }
-            let max_division = mdc(Number(numerador),Number(denominador));
-            
+            let mdc = mdcCalculate(numerador,Number(denominador));
+            if(mdc !== numerador){
+                numerador =  numerador / mdc;
+                denominador =  `${Number(denominador) / mdc}`;
+            }
+            if(bool){
+                return `${decimal[0]}${numerador}/${denominador}`
+            }
+            return `${numerador}/${denominador}`; 
         }
-        return true;
-    }
-    else{
+    } else{
         return false;
     }
     
-}
+};
 
 module.exports = decimalToFrac;
