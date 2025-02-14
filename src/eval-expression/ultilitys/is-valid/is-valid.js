@@ -1,3 +1,30 @@
+/**
+ * Validates a mathematical expression string for proper syntax and structure
+ * 
+ * @param {string} expression - The mathematical expression to validate
+ * @returns {boolean} Returns true if the expression is valid, false otherwise
+ * 
+ * @description
+ * Performs the following validations:
+ * 1. Checks for empty expressions
+ * 2. Validates that expression doesn't start with * or /
+ * 3. Ensures only valid characters are used (numbers, operators, brackets, dots)
+ * 4. Checks for invalid patterns using regex:
+ *    - Two consecutive operators (++, --, +*, etc.)
+ *    - Empty or operator-only brackets ({}, {+}, [], [*], etc.)
+ *    - Multiplication/division immediately after opening brackets
+ *    - Invalid decimal point usage
+ * 5. Verifies matching pairs of brackets
+ * 
+ * @example
+ * isValid("2+2")           // returns true
+ * isValid("2++2")          // returns false (consecutive operators)
+ * isValid("2.3.4")         // returns false (multiple decimal points)
+ * isValid("{}")            // returns false (empty brackets)
+ * isValid("2+{3-4}")       // returns true
+ * isValid("2+{3-4")        // returns false (unmatched brackets)
+ * isValid("*2")            // returns false (starts with operator)
+ */
 const isValid = (expression) => {
  let basic_invalid_regex = /([\+\-\/\*]){2}|\{[\-\+\*\/]?\}|\([\-\+\*\/]?\)|\[([\-\+\*\/])?\]|[\(\[\{]{1}[\*\/]{1}|[^\d]+\.|\.[^\d]+|\.$|^\.|[\d]+\.[\d]+\./; 
  /*basic_invalid_regex match the cases below:
