@@ -23,7 +23,7 @@
  * isValid("{}")            // returns false (empty brackets)
  * isValid("2+{3-4}")       // returns true
  * isValid("2+{3-4")        // returns false (unmatched brackets)
- * isValid("*2")            // returns false (starts with operator)
+ * isValid("*2")            // returns false (starts with multiplication operator )
  */
 const isValid = (expression) => {
  let basic_invalid_regex = /([\+\-\/\*]){2}|\{[\-\+\*\/]?\}|\([\-\+\*\/]?\)|\[([\-\+\*\/])?\]|[\(\[\{]{1}[\*\/]{1}|[^\d]+\.|\.[^\d]+|\.$|^\.|[\d]+\.[\d]+\./; 

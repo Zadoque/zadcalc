@@ -1,11 +1,35 @@
+/**
+ * Marks container boundaries with special characters for further processing (true case)
+ * @param {string} expression - The mathematical expression to modify
+ * @param {number[]} indexs - Array containing start and end indices [start, end]
+ * @returns {string} Expression with container boundaries marked with ! and @
+ * @private
+ */
 const change_container_true= (expression, indexs) => {
     expression = `${expression.slice(0,indexs[0])}!${expression.slice(indexs[0]+1, indexs[1])}@${expression.slice(indexs[1]+ 1)}`;
     return expression;
 }
+/**
+ * Marks container boundaries with special characters for further processing (false case)
+ * @param {string} expression - The mathematical expression to modify
+ * @param {number[]} indexs - Array containing start and end indices [start, end]
+ * @returns {string} Expression with container boundaries marked with # and $
+ * @private
+ */
 const change_container_false = (expression, indexs) => {
     expression = `${expression.slice(0,indexs[0])}#${expression.slice(indexs[0]+1, indexs[1])}$${expression.slice(indexs[1]+ 1)}`;
     return expression;
 }
+
+/**
+ * Determines if a container (brackets/parentheses) should be removed based on its content and context
+ * @param {Object} info - Information about the container and its context
+ * @param {string} info.before_and_after - Characters before and after the container
+ * @param {boolean} info.mult_and_div_inside - Whether the container contains multiplication or division
+ * @param {boolean} info.add_and_sub_inside - Whether the container contains addition or subtraction
+ * @returns {boolean} True if the container should be removed, false otherwise
+ * @private
+ */
 const hasItToRemove = (info) => {
     bool = false;
     if(/\{\}|\[\]|\(\)/.test(info.before_and_after)){
@@ -18,6 +42,27 @@ const hasItToRemove = (info) => {
     return bool;
 }
 
+/**
+ * Analyzes a mathematical expression to identify unnecessary containers (brackets/parentheses)
+ * @param {string} expression - The mathematical expression to analyze
+ * @returns {number[]} Array of indices where unnecessary characters are located
+ * 
+ * @description
+ * This function identifies unnecessary containers (brackets, parentheses, curly braces) in 
+ * mathematical expressions based on several rules:
+ * 1. Empty containers are unnecessary
+ * 2. Containers after operators with no multiplication/division inside are unnecessary
+ * 3. Nested containers without significant operators are unnecessary
+ * 
+ * The function uses special markers:
+ * - !...@ for containers marked for removal
+ * - #...$ for containers that should be kept
+ * 
+ * @example
+ * getUnnecessary("((2+2))")    // returns [1,4,0, 5] (outer parentheses are unnecessary)
+ * getUnnecessary("{[2*3]}")    // returns [1,5,0, 6] (outer braces are unnecessary)
+ * getUnnecessary("(2+2)(3+3)") // returns an empty array
+ */
 const getUnnecessary = (expression) =>{
     let container_regex = /\{[^(\{\[\(\}]*\}|\[[^(\{\[\(\]]*\]|\([^(\{\[\(\)]*\)/;
     let sub_container_regex = /#[^(#)]*\$/;

@@ -102,9 +102,9 @@ const handleRepeatingDecimal = (parts, info) =>{
  * @param {string|number} decimal - The decimal number to convert to a fraction
  * @returns {string} A string representation of the fraction in the format "±numerator/denominator"
  * @example
- * decimalToFrac("0.333333") // returns "1/3"
+ * decimalToFrac("0.333") // returns "+1/3"
  * decimalToFrac("-0.5") // returns "-1/2"
- * decimalToFrac("0.142857142857") // returns "1/7"
+ * decimalToFrac("0.142857142857") // returns "+1/7"
  */
 const decimalToFrac = (decimal) => {
     let parts = decimal.split('.');

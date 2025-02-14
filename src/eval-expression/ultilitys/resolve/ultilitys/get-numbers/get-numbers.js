@@ -1,9 +1,23 @@
 const getSigns = require('./ultilitys/get-signs');
 /**
+ * Extracts two numbers surrounding an operator in a mathematical expression string,
+ * preserving their signs and converting them to numerical values.
  * 
- * @param {String} str - The string that contains the operation you are getting the numbers for
- * @param {number} index -The positon of the operation to get the sign from
- * @returns {Array} An array that has the numbers with they signs ,ex: ['+68.8', '-0.6]
+ * @param {string} str - The mathematical expression string to parse.
+ *                      Should contain numbers with optional decimal points and signs.
+ * @param {number} index - The position (index) of the operator in the string.
+ *                        Used as reference point to extract adjacent numbers.
+ * 
+ * @returns {number[]} An array containing two numbers:
+ *                     [0] - The number before the operator
+ *                     [1] - The number after the operator
+ *                     Both numbers preserve their signs and are converted to Number type.
+ * 
+ * @example
+ * getNumbers("+68.8-0.6*5", 9)  // Returns [-0.6, 5]
+ * getNumbers("1+2.5", 1)        // Returns [1, 2.5]
+ * 
+ * @requires ./ultilitys/get-signs
  */
 const getNumbers = (str, index) => {
     let  numbers =  ['', ''];
