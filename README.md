@@ -143,7 +143,26 @@ npm test
 
 Below is a flowchart explaining how `zadoque-math-resolver` processes expressions:
 
-![zadoque-math-resolver flowchart](./flow-chart.png)
+
+```mermaid
+graph TD;
+    A[Your Math Expression] --> B[evalExpression]
+    B -->|Check| C{Settings Conflict?}
+    C -- Yes --> X[Return Settings Error]
+    C -- No --> D{Valid Expression?}
+    D -- No --> Y[Return Syntax Error]
+    D -- Yes --> E{Has Brackets/Parentheses?}
+
+    E -- Yes --> F[Remove Unnecessary]
+    F --> G{Still Has Brackets?}
+    G -- Yes --> H[Simplify] --> I[Resolve]
+    G -- No --> I[Resolve]
+    E -- No --> I
+
+    I --> J{Division by Zero?}
+    J -- Yes --> K[Return Division by Zero Error]
+    J -- No --> L[Apply Settings] --> M[Return Result] --> O[End]
+
 
 ## Contributing
 
