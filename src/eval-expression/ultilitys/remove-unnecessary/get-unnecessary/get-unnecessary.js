@@ -42,7 +42,14 @@ const getUnnecessary = (expression) =>{
         }
         let mult_and_div_inside = /[\/\*]|\d#/.test(inside.slice(2));
         let add_and_sub_inside = /[\-\+]/.test(inside.slice(2));
-        let before_and_after = `${expression_temp[indexs[0] - 1]}${expression_temp[indexs[1] + 1]}`;
+        let before_and_after = '';
+        if(indexs[0] === 0){
+            before_and_after = `(${expression_temp[indexs[1] + 1]}`;
+        } else if(indexs[1] === expression_temp.length - 1){
+            before_and_after = `${expression_temp[indexs[0] - 1]})`
+        } else {
+            before_and_after = `${expression_temp[indexs[0] - 1]}${expression_temp[indexs[1] + 1]}`;
+        }
         let info = {
             expression_temp: expression_temp,
             before_and_after: before_and_after,

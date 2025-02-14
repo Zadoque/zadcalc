@@ -156,3 +156,7 @@ test("Case 9.5 isValid('99.99.99')", () => {
 test("Case 10.0 isValid('{2+4}}')", () => {
     expect(isValid('{2+4}}')).toBe(false);
 });
+
+test("Case 10.1 isValid('5')", () => {
+    expect(isValid('5')).toBe(true);
+});

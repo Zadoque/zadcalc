@@ -172,3 +172,9 @@ test('getUnnecessary({[-2*({3+(-4)})]})', () => {
 test('getUnnecessary([{(8/4)}/{(6-2)}])', () => {
     expect(getUnnecessary('[{(8/4)}/{(6-2)}]')).toStrictEqual([2,6,1,7,10,14,0,16]);
 }); 
+
+
+test('getUnnecessary (1/2)/(3/4) in fraction mode', () => {
+    
+    expect(getUnnecessary('(1/2)/(3/4)')).toStrictEqual([0,4]);
+});

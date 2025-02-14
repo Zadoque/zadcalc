@@ -68,3 +68,7 @@ test('removeUnnecessary(((5-2)+3))', () => {
     expect(removeUnnecessary('(((5-2)+3))')).toStrictEqual('5-2+3');
 });
 
+test('removeUnnecessary (1/2)/(3/4) in fraction mode', () => {
+    
+    expect(removeUnnecessary('(1/2)/(3/4)')).toBe('1/2/(3/4)');
+});

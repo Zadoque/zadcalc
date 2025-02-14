@@ -11,7 +11,10 @@ const isValid = (expression) => {
     9: \.$|^\. search for a dot in the begining or in the end
     10: [\d]+\.[\d]+\. search for number dot number dot
  */
-    if(expression.lenght <= 2){
+    if(expression.length == 0){
+        return false;
+    }
+    if(/^[\*\/]/.test(expression)){
         return false;
     }
     if(/[^\d\-\+\*\/\{\[\(\)\]\}\.]/.test(expression)){
