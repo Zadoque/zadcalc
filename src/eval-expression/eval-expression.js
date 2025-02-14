@@ -1,6 +1,6 @@
 /**
  * @module mathResolver
- * @description A mathematical expression evaluator with customizable settings
+ * @description A mathematical expression evaluator with customizable settings.
  */
 const isValid = require('./ultilitys/is-valid/is-valid');
 const implicitMultiplication = require('./ultilitys/implicit-multiplication/implicit-multiplication');
@@ -11,15 +11,16 @@ const decimalToFrac = require('./ultilitys/decimal-to-frac/decimal-to-frac');
 
 /**
  * @typedef {Object} MathResolverSettings
- * @property {number} to_fixed - Number of decimal places to round to
- * @property {boolean} frac_mode - Whether to convert decimal results to fractions
- * @property {boolean} positive_sign - Whether to show positive signs (+) in results
- * @property {boolean} return_as_string - Whether to return results as strings
+ * @property {number} to_fixed - Number of decimal places to round results to.
+ * @property {boolean} frac_mode - Whether to convert decimal results to fractions.
+ * @property {boolean} positive_sign - Whether to show positive signs (+) in results.
+ * @property {boolean} return_as_string - Whether to return results as strings.
  */
 
 /**
- * @type {Object}
- * @property {MathResolverSettings} settings - Configuration options for the resolver
+ * The main object containing settings and the expression evaluator function.
+ * @namespace
+ * @property {MathResolverSettings} settings - Configuration options for expression evaluation.
  */
 let mathResolver = {
     settings : {
@@ -30,11 +31,20 @@ let mathResolver = {
     }
 };
 /**
- * Evaluates a mathematical expression according to the configured settings
- * @param {string|number} expression - The mathematical expression to evaluate
- * @returns {string|number} The result of the evaluation, either as a string or number based on settings
- * @throws {string} Returns 'Settings Error!' if invalid settings combinations are used
- * @throws {string} Returns 'Sintax Error' if the expression is invalid
+ * Evaluates a mathematical expression based on the current settings.
+ * 
+ * @function
+ * @param {string|number} expression - The mathematical expression to evaluate. Supports basic operations, fractions, and nested brackets `{}`, `[]`, `()`.
+ * @returns {string|number} The evaluated result, returned as a string or number based on settings.
+ * @throws {Error} Throws an error if there is a syntax issue or invalid settings.
+ * 
+ * @example
+ * const mathResolver = require('zadoque-math-resolver');
+ * console.log(mathResolver.evalExpression('2+2')); // "4"
+ * console.log(mathResolver.evalExpression('1/2')); // "0.5"
+ * 
+ * mathResolver.settings.frac_mode = true;
+ * console.log(mathResolver.evalExpression('1/2')); // "1/2"
  */
  mathResolver.evalExpression = (expression) => {
     expression = expression.toString();
