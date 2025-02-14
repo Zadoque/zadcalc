@@ -21,7 +21,7 @@ npm install zadcalc
 ## Usage
 
 ```javascript
-const mathResolver = require('math-expression-resolver');
+const mathResolver = require('zadcalc');
 
 // Basic usage
 console.log(mathResolver.evalExpression('2+2'));  // Output: "4"
