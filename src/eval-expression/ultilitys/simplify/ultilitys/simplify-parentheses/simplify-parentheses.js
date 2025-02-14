@@ -2,9 +2,10 @@ const resolve = require('../../../resolve/resolve.js');
 const extractExpressionInside = require('./ultilitys/extract-expression-inside.js');
 const updateExpression = require('../update-expression/update-expression.js');
 /**
- * 
- * @param {String} expression - A sting of a numerical expression with parentheses, it can include '+', '-','*' or '/'
- * @returns {string} -The result of the string without parentheses
+ * Simplifies a numerical expression by resolving the expressions contained within parentheses.
+ *
+ * @param {String} expression - A string representing a numerical expression that may include parentheses and the operations: '+', '-', '*', or '/'.
+ * @returns {String} The result of the simplified numerical expression after resolving all parentheses.
  */
 const simplifyParentheses = (expression) => {
     while(expression.includes('(')){

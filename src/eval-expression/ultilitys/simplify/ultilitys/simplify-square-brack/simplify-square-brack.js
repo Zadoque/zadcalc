@@ -3,10 +3,11 @@ const extractExpressionInside = require('./ultilitys/extract-expression-inside.j
 const updateExpression = require('../update-expression/update-expression.js');
 const simplifyParentheses = require('../simplify-parentheses/simplify-parentheses.js');
 /**
- * 
- * @param {String} expression - A sting of a numerical expression with square brackets or/and parentheses.
- *  The operations supported are: '+', '-','*' or '/'
- * @returns {string} -The result of the numerical expression
+ * Simplifies a numerical expression containing square brackets and/or parentheses by resolving the expressions within them.
+ *
+ * @param {String} expression - A string representing a numerical expression that may include square brackets and parentheses.
+ *                              Supported operations are: '+', '-', '*', and '/'.
+ * @returns {String} The result of the simplified numerical expression after resolving all square brackets and parentheses.
  */
 const simplifySquareBrack = (expression) => {
     while(expression.includes('[')){

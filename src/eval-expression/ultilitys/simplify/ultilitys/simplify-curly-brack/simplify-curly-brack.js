@@ -4,10 +4,11 @@ const updateExpression = require('../update-expression/update-expression.js');
 const simplifySquareBrack = require('../simplify-square-brack/simplify-square-brack.js');
 const simplifyParentheses = require('../simplify-parentheses/simplify-parentheses.js');
 /**
- * 
- * @param {String} expression - A sting of a numerical expression with Curly brackets or/and parentheses.
- *  The operations supported are: '+', '-','*' or '/'
- * @returns {string} -The result of the numerical expression
+ * Simplifies a numerical expression containing curly brackets and/or parentheses by resolving the expressions within them.
+ *
+ * @param {String} expression - A string representing a numerical expression that may include curly brackets and parentheses.
+ *                              Supported operations are: '+', '-', '*', and '/'.
+ * @returns {String} The result of the simplified numerical expression after resolving all curly brackets and parentheses.
  */
 const simplifyCurlyBrack = (expression) => {
     while(expression.includes('{')){
