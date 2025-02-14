@@ -161,7 +161,8 @@ graph TD;
 
     I --> J{Division by Zero?}
     J -- Yes --> K[Return Division by Zero Error]
-    J -- No --> L[Apply Settings] --> M[Return Result] --> O[End]
+    J -- No --> L[Apply Settings] --> M[Return Result] --> O[End];
+```
 
 
 ## Contributing
