@@ -31,6 +31,10 @@ console.log(mathResolver.evalExpression('1/2'));  // Output: "0.5"
 mathResolver.settings.frac_mode = true;
 console.log(mathResolver.evalExpression('1/2'));  // Output: "1/2"
 
+// Repeating decimals
+mathResolver.settings.frac_mode = true;
+console.log(mathResolver.evalExpression('3.10622106227106227'));  // Output: "848/273"
+
 // Complex expressions
 console.log(mathResolver.evalExpression('{2*[3+4*(5-2)]-1}/3'));  // Output: "9.66667"
 ```
@@ -117,7 +121,7 @@ mathResolver.evalExpression('1/2')   // "Settings Error! frac mode just work whe
 
 - Basic arithmetic: `+`, `-`, `*`, `/`
 - Parentheses: `()`, `[]`, `{}`
-- Decimal numbers
+- Decimal numbers including repeating decimal ones
 - Fractions
 - Implicit multiplication (e.g., `2(3)` equals `2*3`)
 - Negative numbers
