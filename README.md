@@ -139,6 +139,11 @@ The library includes a comprehensive test suite. To run the tests:
 ```bash
 npm test
 ```
+## Flowchart of Execution
+
+Below is a flowchart explaining how `zadoque-math-resolver` processes expressions:
+
+![zadoque-math-resolver flowchart](./flow-chart.png)
 
 ## Contributing
 
