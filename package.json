@@ -1,8 +1,8 @@
 {
-  "name": "zadoque-math-resolver",
+  "name": "zadcalc",
   "version": "1.0.0",
   "description": "Here is a Node package that recieves a expression as string and returns the result.",
-  "main": "/dist/main.js",
+  "main": "main.js",
   "type": "commonjs",
   "scripts": {
     "test": "jest",

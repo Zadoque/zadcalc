@@ -1,4 +1,4 @@
-# zadoque-math-resolver
+# zadcalc
 
 A powerful JavaScript library for evaluating mathematical expressions with support for fractions, decimal precision control, and customizable output formatting.
 
@@ -15,7 +15,7 @@ A powerful JavaScript library for evaluating mathematical expressions with suppo
 ## Installation
 
 ```bash
-npm install zadoque-math-resolver
+npm install zadcalc
 ```
 
 ## Usage
@@ -141,7 +141,7 @@ npm test
 ```
 ## Flowchart of Execution
 
-Below is a flowchart explaining how `zadoque-math-resolver` processes expressions:
+Below is a flowchart explaining how `zadcalc` processes expressions:
 
 
 ```mermaid
