@@ -1,4 +1,4 @@
-const resolve = require('../../../../src/eval-expression/ultilitys/resolve/resolve');
+const resolve = require('../../../../src/eval-expression/utilities/resolve/resolve');
 
 test("Resolve1( '7-2+6+3') must return '14'",() => {
     expect(resolve('7-2+6+3')).toBe('+14');

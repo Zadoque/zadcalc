@@ -1,0 +1,1 @@
+const extractAddOrSub=require("./utilities/extract-add-or-sub/extract-add-or-sub"),extractMultiOrDiv=require("./utilities/extract-mult-or-div/extract-mult-or-div"),parseOperation=t=>/[*/]/.test(t)?extractMultiOrDiv(t):/[-+]/.test(t.slice(1))?extractAddOrSub(t):t;module.exports=parseOperation;

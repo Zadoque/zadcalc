@@ -1,4 +1,4 @@
-const isValid = require('../../../../src/eval-expression/ultilitys/is-valid/is-valid'); 
+const isValid = require('../../../../src/eval-expression/utilities/is-valid/is-valid'); 
 
 // Case 1: Two signs together
 test("Case 1.1 isValid('++2')", () => {

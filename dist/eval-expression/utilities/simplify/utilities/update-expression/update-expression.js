@@ -1,0 +1,1 @@
+const updateExpression=(e,s,t)=>(/[0-9)\]}]/g.test(e[t[0]-1])&&(e=`${e.slice(0,t[0])}*${e.slice(t[0])}`,t[0]++,t[1]++),/[+-]/.test(e[t[0]-1])&&"0"!==s&&(/[-]/.test(e[t[0]-1])&&(s=""+-1*Number(s)),t[0]--),`${e.slice(0,t[0])}${s}${e.slice(t[1]+1)}`);module.exports=updateExpression;

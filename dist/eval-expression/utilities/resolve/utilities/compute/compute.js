@@ -1,0 +1,1 @@
+const compute=(e,c)=>{let a="";switch(c){case"+":a=`${e[0]+e[1]}`;break;case"-":a=""+(e[0]-e[1]);break;case"*":a=""+e[0]*e[1];break;case"/":a=""+e[0]/e[1]}return a>=0?`+${a}`:a};module.exports=compute;

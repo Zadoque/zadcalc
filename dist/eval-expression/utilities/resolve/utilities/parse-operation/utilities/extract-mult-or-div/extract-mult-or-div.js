@@ -1,0 +1,1 @@
+const extractMultOrDiv=t=>{let e=t.match(/[-+]?[0-9]+(\.[0-9]+)?[*/]{1}[-+]?[0-9]+(\.[0-9]+)?/),n={index_start:e.index};return n.index_end=n.index_start+e[0].length-1,n.index_op=n.index_start+e[0].slice(1).search(/[*/]/)+1,n.sign=t[n.index_op],n};module.exports=extractMultOrDiv;

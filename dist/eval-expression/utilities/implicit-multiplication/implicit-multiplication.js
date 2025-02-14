@@ -1,0 +1,1 @@
+const implicitMultiplication=i=>{let t=/[}\])]{1}[{[(]{1}|[}\])]{1}[\d]{1}|[\d]{1}[{[(]{1}/;for(;t.test(i);){let l=i.match(t);i=`${i.slice(0,l.index+1)}*${i.slice(l.index+1)}`}return i};module.exports=implicitMultiplication;

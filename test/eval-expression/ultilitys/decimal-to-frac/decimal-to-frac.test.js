@@ -1,4 +1,4 @@
-const decimalToFrac = require('../../../../src/eval-expression/ultilitys/decimal-to-frac/decimal-to-frac');
+const decimalToFrac = require('../../../../src/eval-expression/utilities/decimal-to-frac/decimal-to-frac');
 
 test('decimalToFrac (3.106227106227106227', () => {
     expect(decimalToFrac ('3.106227106227106')).toBe('+848/273');

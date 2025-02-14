@@ -1,0 +1,1 @@
+const getSigns=require("./utilities/get-signs"),getNumbers=(e,t)=>{let s=["",""],r=[t,t];for(;/[0-9]|\./.test(e[r[0]-1]);)r[0]--,s[0]=`${e[r[0]]}${s[0]}`;let i=getSigns(e,r[0],t);for(/[-+]/.test(e[t+1])&&(e=`${e.slice(0,t+1)}${e.slice(t+2)}`);/\d|\./.test(e[r[1]+1]);)r[1]++,s[1]+=`${e[r[1]]}`;for(let e=0;e<2;e++)s[e]=Number(`${i[e]}${s[e]}`);return s};module.exports=getNumbers;

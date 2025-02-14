@@ -1,4 +1,4 @@
-const extractExpressionInside = require('../../../../../../../src/eval-expression/ultilitys/simplify/ultilitys/simplify-square-brack/ultilitys/extract-expression-inside');
+const extractExpressionInside = require('../../../../../../../src/eval-expression/utilities/simplify/utilities/simplify-square-brack/utilities/extract-expression-inside');
 let info = {
     resolve_str : '(2+4)*8',
     indexs: [0,8],

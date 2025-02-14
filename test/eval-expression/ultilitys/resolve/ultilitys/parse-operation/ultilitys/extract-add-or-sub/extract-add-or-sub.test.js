@@ -1,4 +1,4 @@
-const extractAddOrSub = require('../../../../../../../../src/eval-expression/ultilitys/resolve/ultilitys/parse-operation/ultilitys/extract-add-or-sub/extract-add-or-sub');
+const extractAddOrSub = require('../../../../../../../../src/eval-expression/utilities/resolve/utilities/parse-operation/utilities/extract-add-or-sub/extract-add-or-sub');
 let info1 = {
     index_start: 0,
     index_op: 6,

@@ -1,4 +1,4 @@
-const getNumbers = require('../../../../../../src/eval-expression/ultilitys/resolve/ultilitys/get-numbers/get-numbers');
+const getNumbers = require('../../../../../../src/eval-expression/utilities/resolve/utilities/get-numbers/get-numbers');
 
 let numbers = [+6, +3];
 let numbers3 = [+556,+728];

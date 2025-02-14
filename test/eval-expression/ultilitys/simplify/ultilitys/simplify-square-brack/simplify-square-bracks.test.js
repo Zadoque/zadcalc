@@ -1,4 +1,4 @@
-const simplifySquareBrack = require('../../../../../../src/eval-expression/ultilitys/simplify/ultilitys/simplify-square-brack/simplify-square-brack');
+const simplifySquareBrack = require('../../../../../../src/eval-expression/utilities/simplify/utilities/simplify-square-brack/simplify-square-brack');
 
 test(`simplifyParentheses [(2+4)*8] must return +48`, () => {
     expect(simplifySquareBrack('[(2+4)*8]')).toBe('+48');

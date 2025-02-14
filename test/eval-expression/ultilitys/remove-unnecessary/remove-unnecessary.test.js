@@ -1,4 +1,4 @@
-const removeUnnecessary = require('../../../../src/eval-expression/ultilitys/remove-unnecessary/remove-unnecessary');
+const removeUnnecessary = require('../../../../src/eval-expression/utilities/remove-unnecessary/remove-unnecessary');
 
 test('removeUnnecessary((2+3)*5 must return 2+3', () => {
     expect(removeUnnecessary('5-(2+3)-5')).toBe('5-2+3-5');
