@@ -12,36 +12,90 @@ A powerful JavaScript library for evaluating mathematical expressions with suppo
 - ✨ Implicit multiplication support
 - 🎨 Customizable output formatting
 
+## Prerequisites
+
+Before installing zadcalc, ensure you have Node.js and npm installed on your system:
+
+1. Install Node.js from [nodejs.org](https://nodejs.org/)
+2. Verify your installation in terminal::
+   ```bash
+   node -v
+   npm -v
+   ```
+3. Create a new Node.js project (if you haven't already):
+   ```bash
+   mkdir my-project
+   cd my-project
+   npm init -y
+   ```
+
 ## Installation
+
+Install zadcalc using npm:
 
 ```bash
 npm install zadcalc
 ```
 
-## Usage
+## Getting Started
+
+1. Create a new JavaScript file (e.g., `index.js`)
+2. Import and use zadcalc:
 
 ```javascript
 const mathResolver = require('zadcalc');
 
-// Basic usage
+// Try some basic calculations
 console.log(mathResolver.evalExpression('2+2'));  // Output: "4"
 console.log(mathResolver.evalExpression('1/2'));  // Output: "0.5"
+```
 
-// Using fraction mode
-mathResolver.settings.frac_mode = true;
-console.log(mathResolver.evalExpression('1/2'));  // Output: "1/2"
+## Usage Examples
 
-// Repeating decimals
-mathResolver.settings.frac_mode = true;
-console.log(mathResolver.evalExpression('3.106227106227106227'));  // Output: "848/273"
+### Basic Operations
+```javascript
+const mathResolver = require('zadcalc');
+
+// Simple arithmetic
+console.log(mathResolver.evalExpression('1+1'));      // "2"
+console.log(mathResolver.evalExpression('10-5'));     // "5"
+console.log(mathResolver.evalExpression('4*3'));      // "12"
+console.log(mathResolver.evalExpression('15/3'));     // "5"
 
 // Complex expressions
-console.log(mathResolver.evalExpression('{2*[3+4*(5-2)]-1}/3'));  // Output: "9.66667"
+console.log(mathResolver.evalExpression('{2*[3+4*(5-2)]-1}/3'));  // "9.66667"
+```
+
+### Working with Fractions
+```javascript
+const mathResolver = require('zadcalc');
+
+// Enable fraction mode
+mathResolver.settings.frac_mode = true;
+mathResolver.settings.return_as_string = true;  // Required for fraction mode
+
+console.log(mathResolver.evalExpression('1/4'));      // "1/4"
+console.log(mathResolver.evalExpression('3/6'));      // "1/2"  // Automatic simplification
+console.log(mathResolver.evalExpression('3.106227106227106227')); // "848/273"
+```
+
+### Customizing Output
+```javascript
+const mathResolver = require('zadcalc');
+
+// Configure decimal places
+mathResolver.settings.to_fixed = 2;
+console.log(mathResolver.evalExpression('1.5+2.3'));  // "3.80"
+
+// Show positive signs
+mathResolver.settings.positive_sign = true;
+mathResolver.settings.return_as_string = true;  // Required for positive signs
+console.log(mathResolver.evalExpression('5'));  // "+5"
 ```
 
 ## Settings
 
-You can customize the behavior using the following settings:
+Customize zadcalc's behavior using these settings:
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
@@ -50,59 +104,37 @@ You can customize the behavior using the following settings:
 | `positive_sign` | boolean | false | Show '+' for positive numbers |
 | `return_as_string` | boolean | true | Return results as strings |
 
-```javascript
-// Customize settings
-mathResolver.settings = {
-    to_fixed: 2,           // Show 2 decimal places
-    frac_mode: true,       // Enable fraction mode
-    positive_sign: true,   // Show positive signs
-    return_as_string: true // Return results as strings
-};
-```
+## Future Features
 
-## Examples
+Exciting features planned for future releases:
 
-### Basic Operations with default setting
-```javascript
-mathResolver.evalExpression('1+1')      // "2"
-mathResolver.evalExpression('10-5')     // "5"
-mathResolver.evalExpression('4*3')      // "12"
-mathResolver.evalExpression('15/3')     // "5"
-```
+### Advanced Mathematical Operations
+- ⚡ Exponentiation (powers and roots)
+- 📊 Scientific notation support
+- ⚗️ Root extraction
 
-### Decimal Operations
-```javascript
-mathResolver.settings.to_fixed = 2;
-mathResolver.evalExpression('1.5+2.3')  // "3.80"
-```
+### Matrix Operations
+- 📐 Basic matrix arithmetic
+- 🎯 Determinant calculation
+- ⚖️ Matrix transformations
 
-### Fraction Mode
-```javascript
-mathResolver.settings.frac_mode = true;
-mathResolver.evalExpression('1/4')      // "1/4"
-mathResolver.evalExpression('3/6')      // "1/2"  // Automatic simplification
-```
+### Advanced Mathematics
+- 📈 Polynomial operations
+- ⚡ Equation solving
+- 🔄 Limit computation
+- 📊 Derivative calculation
+- ∫ Integral computation
 
-### Complex Expressions
-```javascript
-mathResolver.evalExpression('{2*[3+4]}/2')  // "7"
-mathResolver.evalExpression('2(3)')         // "6"  // Implicit multiplication
-```
-
-### Formatting Options
-```javascript
-// Show positive signs
-mathResolver.settings.positive_sign = true;
-mathResolver.evalExpression('5')  // "+5"
-
-// Return as number
-mathResolver.settings.return_as_string = false;
-mathResolver.evalExpression('5')  // 5 (number type)
-```
+### Additional Planned Features
+- 📐 Trigonometric functions
+- 🎯 Complex number support
+- 📊 Statistical functions
+- 🔄 Vector operations
+- 📈 Graphing capabilities
 
 ## Error Handling
 
-The library provides clear error messages for invalid inputs:
+The library provides clear error messages:
 
 ```javascript
 // Syntax errors
@@ -117,32 +149,9 @@ mathResolver.settings.return_as_string = false;
 mathResolver.evalExpression('1/2')   // "Settings Error! frac mode just work when return_as_string is true"
 ```
 
-## Supported Operations
-
-- Basic arithmetic: `+`, `-`, `*`, `/`
-- Parentheses: `()`, `[]`, `{}`
-- Decimal numbers including repeating decimal ones
-- Fractions
-- Implicit multiplication (e.g., `2(3)` equals `2*3`)
-- Negative numbers
-
-## Limitations
-
-- Fraction mode requires `return_as_string` to be `true`
-- Positive sign display requires `return_as_string` to be `true`
-- Scientific notation is not supported
-
-## Testing
-
-The library includes a comprehensive test suite. To run the tests:
-
-```bash
-npm test
-```
 ## Flowchart of Execution
 
 Below is a flowchart explaining how `zadcalc` processes expressions:
-
 
 ```mermaid
 graph TD;
@@ -164,6 +173,13 @@ graph TD;
     J -- No --> L[Apply Settings] --> M[Return Result] --> O[End];
 ```
 
+## Testing
+
+Run the test suite:
+
+```bash
+npm test
+```
 
 ## Contributing
 
