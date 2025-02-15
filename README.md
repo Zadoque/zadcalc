@@ -171,7 +171,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the [CC BY-NC 4.0 License]{https://creativecommons.org/licenses/by-nc/4.0/} - see the LICENSE file for details.
+This project is licensed under the [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/) - see the LICENSE file for details.
 
 ## Support
 
