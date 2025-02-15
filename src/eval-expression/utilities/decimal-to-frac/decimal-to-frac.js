@@ -45,8 +45,6 @@ const isRepeatingDecimal = (decimal) => {
     };
     for(let j = 1; j < decimal.length - 1; j++ ){
         let repeat = decimal_temp[0];
-        let count = 0;
-        let index = -1;
         if(decimal_temp.indexOf(repeat,1)){
             let next = decimal_temp.indexOf(repeat,1);
             if(next === 1 && decimal_temp[next + 1] === repeat){
