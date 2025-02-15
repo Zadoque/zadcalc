@@ -20,3 +20,6 @@ test('decimalToFrac (0.142857142857)', () => {
     expect(decimalToFrac('0.142857142857')).toBe('+1/7');
 })
 
+test('decimalToFrac (0.142857142857)', () => {
+    expect(decimalToFrac('0.333')).toBe('+1/3');
+})

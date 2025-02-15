@@ -44,25 +44,23 @@ const isRepeatingDecimal = (decimal) => {
         bool: false
     };
     for(let j = 1; j < decimal.length - 1; j++ ){
-        let repeat = [];
-        repeat.push(decimal_temp[0]);
+        let repeat = decimal_temp[0];
         let count = 0;
-        let index = 0;
-        for(let i = 1; i < decimal_temp.length - 1; i++){
-            if(decimal_temp[i] === repeat[count] ){
-                count++;
-                repeat.push(decimal_temp[count]);
-                if(index === 0){
-                    index = i;
-                }
-            }
-        }
-        if(repeat.length > 3){
-            let repeat_str = repeat.reduce((char1,char2) => char1 += `${char2}`);
-            if(repeat_str.length === decimal_temp.length || repeat_str.length + index === decimal_temp.length){
+        let index = -1;
+        if(decimal_temp.indexOf(repeat,1)){
+            let next = decimal_temp.indexOf(repeat,1);
+            if(next === 1 && decimal_temp[next + 1] === repeat){
                 info.bool = true;
                 info.dizim = j - 1;
-                info.periodo = index;
+                info.periodo = next;
+                return info;
+            }
+            let parts = [decimal_temp.slice(0, next), decimal_temp.slice(next)];
+            let parts1length = parts[1].length;
+            if(parts[0].slice(0,parts1length) === parts[1]){
+                info.bool = true;
+                info.dizim = j - 1;
+                info.periodo = next;
                 return info;
             }
         }
