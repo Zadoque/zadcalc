@@ -34,9 +34,9 @@ function decimalToFraction(decimal) {
  * @returns {Object} Information about the repeating decimal
  * @property {boolean} bool - Whether the decimal is repeating
  * @property {number} [dizim] - The position where the repeating sequence starts
- * @property {number} [periodo] - The length of the repeating sequence
+ * @property {number} [period] - The length of the repeating sequence
  * @example
- * isRepeatingDecimal("333333") // returns { bool: true, dizim: 0, periodo: 1 }
+ * isRepeatingDecimal("333333") // returns { bool: true, dizim: 0, period: 1 }
  */
 const isRepeatingDecimal = (decimal) => {
     let decimal_temp = decimal;
@@ -49,16 +49,16 @@ const isRepeatingDecimal = (decimal) => {
             let next = decimal_temp.indexOf(repeat,1);
             if(next === 1 && decimal_temp[next + 1] === repeat){
                 info.bool = true;
-                info.dizim = j - 1;
-                info.periodo = next;
+                info.dizim = j - 1; // position where the repeating starts
+                info.period = next; // length of the period 
                 return info;
             }
             let parts = [decimal_temp.slice(0, next), decimal_temp.slice(next)];
             let parts1length = parts[1].length;
             if(parts[0].slice(0,parts1length) === parts[1]){
                 info.bool = true;
-                info.dizim = j - 1;
-                info.periodo = next;
+                info.dizim = j - 1; 
+                info.period = next; // length of the period 
                 return info;
             }
         }
@@ -71,16 +71,16 @@ const isRepeatingDecimal = (decimal) => {
  * @param {string[]} parts - Array containing the integer and decimal parts
  * @param {Object} info - Information about the repeating sequence
  * @param {number} info.dizim - The position where the repeating sequence starts
- * @param {number} info.periodo - The length of the repeating sequence
+ * @param {number} info.period - The length of the repeating sequence
  * @returns {string} A string representation of the fraction in the format "numerator/denominator"
  * @example
- * handleRepeatingDecimal(["0", "333333"], { dizim: 0, periodo: 1 }) // returns "1/3"
+ * handleRepeatingDecimal(["0", "333333"], { dizim: 0, period: 1 }) // returns "1/3"
  */
 const handleRepeatingDecimal = (parts, info) =>{
-    let numerador = Number(`${parts[0]}${parts[1].slice(0,info.dizim)}${parts[1].slice(info.dizim, info.dizim + info.periodo )}`);
+    let numerador = Number(`${parts[0]}${parts[1].slice(0,info.dizim)}${parts[1].slice(info.dizim, info.dizim + info.period )}`);
     numerador -= Number(`${parts[0]}${parts[1].slice(0, info.dizim )}`);
     let denominador = ``;
-    for(let i = 0; i < info.periodo; i++){
+    for(let i = 0; i < info.period; i++){
         denominador += `9`;
     }
     for(let i = 0; i < info.dizim; i++){
