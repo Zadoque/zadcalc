@@ -23,7 +23,7 @@ const gcdCalculate = (a, b) =>{
 function decimalToFraction(decimal) {
     let len = decimal.toString().length - decimal.toString().search(/\./);
     let denominator = Math.pow(10, len);
-    let numerator = Number(decimal) * denominator;
+    let numerator = Math.round(Number(decimal) * denominator);
     let divisor = gcdCalculate(numerator, denominator);
     return `${Math.floor(numerator / divisor)}/${Math.floor(denominator / divisor)}`;
 }
@@ -50,15 +50,15 @@ const isRepeatingDecimal = (decimal) => {
             if(next === 1 && decimal_temp[next + 1] === repeat){
                 info.bool = true;
                 info.dizim = j - 1; // position where the repeating starts
-                info.period = next; // length of the period 
+                info.period = next; // length of the period
                 return info;
             }
             let parts = [decimal_temp.slice(0, next), decimal_temp.slice(next)];
             let parts1length = parts[1].length;
             if(parts[0].slice(0,parts1length) === parts[1]){
                 info.bool = true;
-                info.dizim = j - 1; 
-                info.period = next; // length of the period 
+                info.dizim = j - 1;
+                info.period = next; // length of the period
                 return info;
             }
         }
@@ -118,7 +118,7 @@ const decimalToFrac = (decimal) => {
         if(info.bool){
             fraction =   handleRepeatingDecimal(parts, info);
         } else{
-            fraction = decimalToFraction(`${parts[0]}${parts[1]}`);
+            fraction = decimalToFraction(`${parts[0]}.${parts[1]}`);
         }
     } else{
         fraction = decimalToFraction(`${parts[0]}.${parts[1]}`);

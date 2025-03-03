@@ -1,6 +1,6 @@
 {
   "name": "zadcalc",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Here is a Node package that recieves a expression as string and returns the result.",
   "main": "dist/main.js",
   "type": "commonjs",

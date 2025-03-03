@@ -23,3 +23,11 @@ test('decimalToFrac (0.142857142857)', () => {
 test('decimalToFrac (0.142857142857)', () => {
     expect(decimalToFrac('0.333')).toBe('+1/3');
 })
+
+test('decimalToFrac (0.567)', () => {
+    expect(decimalToFrac('0.567')).toBe('+567/1000');
+})
+
+test('decimalToFrac (0.567)', () => {
+    expect(decimalToFrac('0.56')).toBe('+14/25');
+})
