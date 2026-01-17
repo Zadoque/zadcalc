@@ -1,6 +1,6 @@
 {
   "name": "zadcalc",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Here is a Node package that receives a expression as string and returns the result.",
   "main": "./dist/main.js",
   "module": "./dist/main.mjs",
@@ -21,7 +21,12 @@
     "type": "git",
     "url": "git+https://github.com/Zadoque/zadcalc.git"
   },
-  "keywords": ["math", "calculator", "expression", "eval"],
+  "keywords": [
+    "math",
+    "calculator",
+    "expression",
+    "eval"
+  ],
   "author": "Zadoque Carneiro",
   "license": "ISC",
   "bugs": {
