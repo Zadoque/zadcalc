@@ -160,3 +160,7 @@ test("Case 10.0 isValid('{2+4}}')", () => {
 test("Case 10.1 isValid('5')", () => {
     expect(isValid('5')).toBe(true);
 });
+
+test("Case 11 IsValid('-3+2')", () => {
+    expect(isValid('-3+2')).toBe(true);
+});
