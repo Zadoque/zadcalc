@@ -1,20 +1,27 @@
 {
   "name": "zadcalc",
-  "version": "2.0.2",
-  "description": "Here is a Node package that recieves a expression as string and returns the result.",
-  "main": "dist/main.js",
+  "version": "2.1.0",
+  "description": "Here is a Node package that receives a expression as string and returns the result.",
+  "main": "./dist/main.js",
+  "module": "./dist/main.mjs",
   "type": "commonjs",
+  "exports": {
+    ".": {
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.js"
+    }
+  },
   "scripts": {
     "test": "jest",
     "lint": "eslint",
     "start": "node src/modules/main.js",
-    "build": "rm -rf dist && mkdir -p dist && find src -name '*.js' -type f -exec sh -c 'for file do mkdir -p \"dist/$(dirname \\\"${file#src/}\\\")\" && terser \"$file\" --compress --mangle -o \"dist/${file#src/}\"; done' sh {} +"
+    "build": "rm -rf dist && mkdir -p dist && find src -name '*.js' -type f -exec sh -c 'for file do mkdir -p \"dist/$(dirname \\\"${file#src/}\\\")\" && terser \"$file\" --compress --mangle -o \"dist/${file#src/}\"; done' sh {} + && cp src/main.mjs dist/main.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zadoque/zadoque-math-resolver.git"
+    "url": "git+https://github.com/Zadoque/zadcalc.git"
   },
-  "keywords": [],
+  "keywords": ["math", "calculator", "expression", "eval"],
   "author": "Zadoque Carneiro",
   "license": "ISC",
   "bugs": {
