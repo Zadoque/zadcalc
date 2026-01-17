@@ -15,7 +15,7 @@
     "test": "jest",
     "lint": "eslint",
     "start": "node src/modules/main.js",
-    "build": "rm -rf dist && mkdir -p dist && find src -name '*.js' -type f -exec sh -c 'for file do mkdir -p \"dist/$(dirname \\\"${file#src/}\\\")\" && terser \"$file\" --compress --mangle -o \"dist/${file#src/}\"; done' sh {} + && cp src/main.mjs dist/main.mjs"
+    "build": "rm -rf dist && mkdir -p dist && find src -name '*.js' -exec sh -c 'target=\"dist/${1#src/}\"; mkdir -p \"$(dirname \"$target\")\"; terser \"$1\" --compress --mangle -o \"$target\"' _ {} \\; && cp src/main.mjs dist/main.mjs"
   },
   "repository": {
     "type": "git",
