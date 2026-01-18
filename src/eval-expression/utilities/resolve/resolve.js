@@ -24,7 +24,7 @@ const compute = require(`./utilities/compute/compute`);
 
 const resolve =  (expression) =>{
     let result = ``;
-    if(!/[+\-/*]/.test(expression.slice(1))){
+    if(!/[+\-/*/^]/.test(expression.slice(1))){
         return expression;
     }
     while(/[+\-/*]/.test(expression.slice(1))){

@@ -18,12 +18,36 @@ test(`simplify {{[[(2+3)]]} must return +5`, () => {
 });
 
 
-test(`simplify 2+3*4-[6/2]+8-2 must return "2+3*4*-3+8-2"`, () => {
+test(`simplify 2+3*4-[6/2]+8-2 must return "2+3*4-3+8-2"`, () => {
     expect(simplify(`2+3*4-[6/2]+8-2`)).toBe(`2+3*4-3+8-2`);
 });
 
 
 
-test(`simplify (2+3)*4-[6/2]+8-2 must return "+14"`, () => {
+test(`simplify  '(2*3)*4-[6/2]+8-2' must return "+6*4-3+8-2"`, () => {
     expect(simplify(`(2*3)*4-[6/2]+8-2`)).toBe(`+6*4-3+8-2`);
 });
+
+test(`simplify('2^(3)+5') must return 2^3+5`, () => {
+    expect(simplify(`2^(3)+5`)).toBe(`2^3+5`);
+});
+
+test(`simplify('(2)^(3)+5') must return 2^3+5`, () => {
+    expect(simplify(`(2)^(3)+5`)).toBe(`2^3+5`);
+});
+
+
+test(`simplify('(-2)^(3)+5') must return @NEG2^3+5`, () => {
+    expect(simplify(`(-2)^(3)+5`)).toBe(`@NEG2^3+5`);
+});
+
+
+test(`simplify('(-2+1)^(3)+5') must return @NEG1^3+5`, () => {
+    expect(simplify(`(-2+1)^(3)+5`)).toBe(`@NEG1^3+5`);
+});
+
+
+test(`simplify('(-2{3-5})^(3)+5') must return 4^3+5`, () => {
+    expect(simplify(`(-2{3-5})^(3)+5`)).toBe(`+4^3+5`);
+});
+
