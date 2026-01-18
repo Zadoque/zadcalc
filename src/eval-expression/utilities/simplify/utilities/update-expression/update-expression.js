@@ -12,16 +12,22 @@ const updateExpression = (expression, result, indexs) => {
         indexs[0]++;
         indexs[1]++;
     }
-    if(expression[indexs[1]+1] === `^` && Number(result) < 0 ){
-        console.log(`The expression is: ${expression} and the end of it is: ${expression[indexs[1] + 1]}`);
-        result = `@NEG${result.slice(1)}`;
-    } 
+
     if(/[+-]/.test(expression[indexs[0] - 1]) && result !== `0`){
         if(/[-]/.test(expression[indexs[0] - 1])){
             result = `${Number(result) * (-1)}`;
         }
-        indexs[0]--;
+        if(expression[indexs[1]+1] != '^'){
+            indexs[0]--;
+        }
     }
+
+    if(expression[indexs[1]+1] === `^` && Number(result) < 0 ){
+        console.log(`The expression is: ${expression} and the end of it is: ${expression[indexs[1] + 1]}`);
+        console.log(`The result was: ${result}`);
+        result = `@NEG${result.slice(1)}`;
+    } 
+    
     return`${expression.slice(0,indexs[0])}${result}${expression.slice(indexs[1] + 1)}`;
 };
 

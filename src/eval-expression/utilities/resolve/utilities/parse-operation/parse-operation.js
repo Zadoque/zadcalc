@@ -12,8 +12,11 @@
 
 const extractAddOrSub = require(`./utilities/extract-add-or-sub/extract-add-or-sub`);
 const extractMultiOrDiv = require(`./utilities/extract-mult-or-div/extract-mult-or-div`);
-
+const extractPotentiation = require(`./utilities/extract-potentiation/extract-potentiation`);
 const parseOperation = (expression) =>{
+    if(/\^/.test(expression)){
+        return extractPotentiation(expression);
+    }
     if(/[*/]/.test(expression)){
         return extractMultiOrDiv(expression);
     }

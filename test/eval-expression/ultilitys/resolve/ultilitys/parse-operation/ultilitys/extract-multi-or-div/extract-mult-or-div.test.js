@@ -5,6 +5,6 @@ let info1 = {
     index_end: 14,
     sign: '*'
 }
-test(`Extract opera -509.8+6.98-3*9 must return ${info1}`, () => {
+test(`extractMultOrDiv('-509.8+6.98-3*9') must return ${info1}`, () => {
     expect(extractMultOrDiv('-509.8+6.98-3*9')).toStrictEqual(info1);
 });
