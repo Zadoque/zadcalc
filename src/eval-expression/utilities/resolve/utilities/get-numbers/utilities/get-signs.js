@@ -16,13 +16,15 @@
  * getSigns("2-3", 0, 1)     // Returns ['+', '-']
  * getSigns("-2-3", 1, 2)    // Returns ['-', '-']
  * getSigns("2+3", 0, 1)     // Returns ['+', '+']
+ * getSigns("@NEG32^36", 4, 6)     // Returns ['-', '+']
+ * getSigns("56^-3", 0, 2)         // Returns ['+', '-']
  */
 const getSigns = (str, index1, index2) => {
     let signs = [];
     if (index1 === 0){
         signs.push(`+`);
     } else{
-        if(/[-]/.test(str[index1 - 1])){
+        if((/[-]/.test(str[index1 - 1]) && str[index2] !== '^') ||/G/.test(str[index1 - 1])){
             signs.push(`-`);
         }
         else{signs.push(`+`);};

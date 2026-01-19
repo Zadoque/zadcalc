@@ -74,6 +74,9 @@ mathResolver.evalExpression = (expression) => {
             if(mathResolver.settings.frac_mode){
                 expression = decimalToFrac(expression);
             } else {
+                if(/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)){
+                    return expression;
+                }
                 let len = expression.split(`.`)[1].length;
                 if(len > mathResolver.settings.to_fixed){
                     expression = `${Number(expression).toFixed(mathResolver.settings.to_fixed)}`;

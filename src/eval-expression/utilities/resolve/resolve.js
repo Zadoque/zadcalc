@@ -27,11 +27,22 @@ const resolve =  (expression) =>{
     if(!/[+\-/*/^]/.test(expression.slice(1))){
         return expression;
     }
-    while(/[+\-/*]/.test(expression.slice(1))){
-        let info = parseOperation(expression);
+    let show = false; 
+    while(/[+\-/*\^]/.test(expression.slice(1))){
+        if(/[+-]?\d+(\.\d+)?e[+-]?\d+/.test(expression)){
+            let verify_str = expression.match(/[+-]?\d+(\.\d+)?e[+-]?\d+/);
+            console.log(`Verify str is: ${verify_str[0]}`);
+            if(verify_str[0].length == expression.length){
+                return expression;
+            }
+        }
+        let info = parseOperation(expression);       
         let numbers = getNumbers(expression, info.index_op);
         if(numbers[1] === 0 && info.sign === `/`){
             return `Error! division by zero`;
+        }
+        if((numbers[0] === numbers[1] === 0)&& info.sign === '^'){
+            return `Error! 0 in potation of 0`;
         }
         result = `${compute(numbers, info.sign)}`;
 
