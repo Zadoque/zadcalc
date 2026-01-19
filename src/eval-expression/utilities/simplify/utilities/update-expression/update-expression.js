@@ -23,8 +23,8 @@ const updateExpression = (expression, result, indexs) => {
     }
 
     if(expression[indexs[1]+1] === `^` && Number(result) < 0 ){
-        console.log(`The expression is: ${expression} and the end of it is: ${expression[indexs[1] + 1]}`);
-        console.log(`The result was: ${result}`);
+        //console.log(`The expression is: ${expression} and the end of it is: ${expression[indexs[1] + 1]}`);
+        //console.log(`The result was: ${result}`);
         result = `@NEG${result.slice(1)}`;
     } 
     
