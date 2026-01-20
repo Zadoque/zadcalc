@@ -6,6 +6,7 @@ test(`evalExpression {-2[9.4/8.0]6-4/(5-3)-8} must return 2*6*8`, () => {
 
 test(`evalExpression 1/90 must return 2*6*8`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression('1/90')).toBe('+1/90');
 });
 

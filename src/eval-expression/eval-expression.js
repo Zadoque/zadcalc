@@ -8,7 +8,8 @@ const removeUnnecessary = require(`./utilities/remove-unnecessary/remove-unneces
 const simplify = require(`./utilities/simplify/simplify`);
 const resolve = require(`./utilities/resolve/resolve`);
 const decimalToFrac = require(`./utilities/decimal-to-frac/decimal-to-frac`);
-
+const toSciNotation = require('./utilities/to-sci-notation/to-sci-notation');
+const smartToFixed = require('./utilities/smart-to-fixed/smart-to-fixed');
 /**
  * @typedef {Object} MathResolverSettings
  * @property {number} to_fixed - Number of decimal places to round results to.
@@ -16,6 +17,7 @@ const decimalToFrac = require(`./utilities/decimal-to-frac/decimal-to-frac`);
  * @property {boolean} frac_mode - Whether to convert decimal results to fractions.
  * @property {boolean} positive_sign - Whether to show positive signs (+) in results.
  * @property {boolean} return_as_string - Whether to return results as strings.
+ * @property {boolean} always_return_sci_notation - Whether to return in scientific notation or not
  */
 
 /**
@@ -54,6 +56,9 @@ mathResolver.evalExpression = (expression) => {
     if (mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string) {
         return `Settings Error! frac mode only works when return_as_string is true`;
     }
+    if (mathResolver.settings.frac_mode && mathResolver.settings.smart_to_fixed) {
+        return `Settings Error!: frac mode and smart to fixed are true, but you can choose just one of them, turn off one and try again!`;
+    }
     if (mathResolver.settings.frac_mode && mathResolver.settings.always_return_sci_notation) {
         return `Settings Error!: frac mode and sci notation are true, but you can choose just one of them, turn off one and try again!`;
     }
@@ -85,7 +90,9 @@ mathResolver.evalExpression = (expression) => {
             } else if (/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)) {
                 return expression;
             } else if (mathResolver.settings.always_return_sci_notation) {
-                return `still working on it.`;
+                return toSciNotation(expression);
+            } else if (mathResolver.settings.smart_to_fixed) { 
+                expression = smartToFixed(expression);
             } else {
                 let len = expression.split(`.`)[1].length;
                 if (len > mathResolver.settings.to_fixed) {

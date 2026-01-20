@@ -8,6 +8,7 @@ test(`evalExpression {-2[9.4/8.0]6-4/(5-3)-8} must return 2*6*8`, () => {
 
 test(`evalExpression 1/90 must return 2*6*8`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`1/90`)).toBe(`1/90`);
 });
 
@@ -116,10 +117,12 @@ test(`evalExpression 1.5+1/2 in fraction mode`, () => {
 
 // Error Cases
 test(`evalExpression with invalid syntax`, () => {
+
     expect(evalExpression(`2++2`)).toBe(`Sintax Error`);
 });
 
 test(`evalExpression with mismatched brackets`, () => {
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`{2+3`)).toBe(`Sintax Error`);
 });
 
@@ -163,6 +166,7 @@ test(`evalExpression -5+-3 must return -8`, () => {
 // Complex Fractions
 test(`evalExpression 1/2+1/3+1/4 in fraction mode`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`1/2+1/3+1/4`)).toBe(`13/12`);
 });
 
@@ -181,6 +185,7 @@ test(`evalExpression {[2+3](4+5)} must return 45`, () => {
 test(`evalExpression 1/3 with 5 decimal places`, () => {
     mathResolver.settings.frac_mode = false;
     mathResolver.settings.to_fixed = 5;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`1/3`)).toBe(`0.33333`);
 });
 
@@ -192,6 +197,7 @@ test(`evalExpression 2.5*3+{4/2}-[1.5] must return 9`, () => {
 // Fraction Simplification
 test(`evalExpression 4/8 in fraction mode must simplify`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`4/8`)).toBe(`1/2`);
 });
 
@@ -215,13 +221,15 @@ test(`evalExpression {[2+3]}+[4+5] must return 14`, () => {
 // Long Decimal Results
 test(`evalExpression 22/7 in decimal mode`, () => {
     mathResolver.settings.frac_mode = false;
-    mathResolver.settings.to_fixed = 5;    
+    mathResolver.settings.to_fixed = 5;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`22/7`)).toBe(`3.14286`);
 });
 
 // Multiple Fraction Operations
 test(`evalExpression 1/2*1/3*1/4 in fraction mode`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`1/2*1/3*1/4`)).toBe(`1/24`);
 });
 
@@ -247,22 +255,34 @@ test(`evalExpression 1-2+3-4+5 must return 3`, () => {
 test(`evalExpression (1/2)/(3/4) in fraction mode`, () => {
     mathResolver.settings.frac_mode = true;
     mathResolver.settings.positive_sign = false;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`(1/2)/(3/4)`)).toBe(`2/3`);
 });
 
 // Multiple Decimal Points
+test(`evalExpression 1.1*1.1 must return 1.21`, () => {
+    mathResolver.settings.frac_mode = false;
+    mathResolver.settings.to_fixed = 5;
+    mathResolver.settings.positive_sign = false;
+    mathResolver.settings.smart_to_fixed = true;
+    expect(evalExpression(`1.1*1.1`)).toBe(`1.21`);
+});
+
 test(`evalExpression 1.1*1.1 must return 1.21000`, () => {
     mathResolver.settings.frac_mode = false;
     mathResolver.settings.to_fixed = 5;
     mathResolver.settings.positive_sign = false;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`1.1*1.1`)).toBe(`1.21000`);
 });
+
 
 
 
 // Multiple Settings Test
 test(`evalExpression 1.5 with multiple settings`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     mathResolver.settings.positive_sign = true;
     mathResolver.settings.return_as_string = true;
     expect(evalExpression(`1.5`)).toBe(`+3/2`);
@@ -272,12 +292,14 @@ test(`evalExpression 1.5 with multiple settings`, () => {
 test(`evalExpression -1/4 in fraction mode`, () => {
     mathResolver.settings.frac_mode = true;
     mathResolver.settings.positive_sign = false;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`-1/4`)).toBe(`-1/4`);
 });
 
 // Complex Decimal to Fraction
 test(`evalExpression 0.333333 in fraction mode`, () => {
     mathResolver.settings.frac_mode = true;
+    mathResolver.settings.smart_to_fixed = false;
     expect(evalExpression(`0.333333`)).toBe(`1/3`);
 });
 
