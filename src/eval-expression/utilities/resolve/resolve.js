@@ -24,12 +24,8 @@ const compute = require(`./utilities/compute/compute`);
 
 const resolve =  (expression) =>{
     let result = ``;
-    let show = false;
     if(!/[+\-/*/^]/.test(expression.slice(1))){
         return expression;
-    }
-    if (expression === `1.23e+10+5.67e-8`){
-        show = true;
     }
     while(/[+\-/*\^]/.test(expression.slice(1))){
         if(/[+-]?\d+(\.\d+)?e[+-]?\d+/.test(expression)){
@@ -47,16 +43,8 @@ const resolve =  (expression) =>{
             return `Error! 0 in potation of 0`;
         }
         result = `${compute(numbers, info.sign)}`;
-        if(show){
-            console.log(`The expression is: ${expression}, The result is: ${result}`);
-            console.log(`The numbers are: ${numbers}`);
-        }
         expression = `${expression.slice(0, info.index_start)}${result}${expression.slice(info.index_end + 1)}`;
         result = expression;
-        if(show){
-            //return expression;
-            console.log(`Expression after putting the result into it is: ${expression}`);
-        }
     }
     return result;
 };

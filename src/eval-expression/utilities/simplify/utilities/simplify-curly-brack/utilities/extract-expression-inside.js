@@ -8,7 +8,7 @@
  *      @property {String} expression - The original input expression.
  */
 const extractExpressionInside = (expression)  => {
-    let curly_brack_regex = /\{(([-+*/]{0,2}[0-9]+(\.[0-9]+)?)?[-+*/]?)*(\[)?(([-+*/]?\()?[-+/*]{0,2}[0-9]+(\.[0-9]+)?(\))?)+(\])?([-+*/]{0,2}[0-9]+(\.[0-9])?)*([-+*/]?\(([-+*/]{0,2}[0-9]+(\.[0-9]+)?)+\))*([-+*/]{0,2}[0-9]+(\.[0-9])?)*\}/;
+    let curly_brack_regex = /\{([^{}]*)\}/;
     let resolve_str = expression.match(curly_brack_regex);
     let index_a = resolve_str.index;
     let index_b = resolve_str[0].length + index_a - 1;
