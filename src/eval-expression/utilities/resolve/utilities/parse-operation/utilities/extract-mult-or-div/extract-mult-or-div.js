@@ -14,7 +14,7 @@
  * extractMultOrDiv("10/2+3")   // Returns { index_start: 0, index_end: 3, index_op: 2, sign: '/' }
  */
 const extractMultOrDiv = (expression) =>{
-    let op_str = expression.match(/[+-]?\d+(\.\d+)?e[+-]?\d+[*\/]{1}[+-]?\d+(\.\d+)?e[+-]?\d+|[-+]?[0-9]+(\.[0-9]+)?[*\/]{1}[-+]?[0-9]+(\.[0-9]+)?/);
+    let op_str = expression.match(/[+-]?\d+(\.\d+)?(e[+-]?\d+)?[*\/]{1}[+-]?\d+(\.\d+)?(e[+-]?\d+)?/);
     let info = {
         index_start: op_str.index,
     };

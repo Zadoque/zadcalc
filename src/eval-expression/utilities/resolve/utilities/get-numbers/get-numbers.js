@@ -40,7 +40,7 @@ const getNumbers = (str, index) => {
         }
     }
     indexs[0]++;
-    console.log(`The str is: ${str} and the number one is: ${numbers[0]}`);
+   // console.log(`The str is: ${str} and the number one is: ${numbers[0]}`);
     let signs = getSigns(str, indexs[0], index);
     if (/[-+]/.test(str[index + 1])) {
         str = `${str.slice(0, index + 1)}${str.slice(index + 2)}`;

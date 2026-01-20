@@ -85,23 +85,23 @@ describe('Operação de Divisão (/)', () => {
 
 describe('Operação de Exponenciação (^)', () => {
     test('deve retornar +8 para [2, 3]', () => {
-        expect(compute([2, 3], '^')).toBe('+8');
+        expect(compute([2, 3], '^')).toBe('8');
     });
 
     test('deve retornar +25 para [5, 2]', () => {
-        expect(compute([5, 2], '^')).toBe('+25');
+        expect(compute([5, 2], '^')).toBe('25');
     });
 
     test('deve retornar +1 para [10, 0]', () => {
-        expect(compute([10, 0], '^')).toBe('+1');
+        expect(compute([10, 0], '^')).toBe('1');
     });
 
     test('deve retornar +0.25 para [2, -2]', () => {
-        expect(compute([2, -2], '^')).toBe('+0.25');
+        expect(compute([2, -2], '^')).toBe('0.25');
     });
 
     test('deve retornar +1 para [-1, 2]', () => {
-        expect(compute([-1, 2], '^')).toBe('+1');
+        expect(compute([-1, 2], '^')).toBe('1');
     });
 
     test('deve retornar -1 para [-1, 3]', () => {

@@ -37,7 +37,7 @@ const compute = (numbers, operation) => {
         result = `${numbers[0] / numbers[1]}`;;
         break;
     }
-    if(Number(result) >= 0){
+    if(Number(result) >= 0 && operation !== '^'){
         return `+${result}`;
     }
     return result;

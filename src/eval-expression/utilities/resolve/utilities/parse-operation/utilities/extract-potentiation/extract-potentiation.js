@@ -1,5 +1,5 @@
 const extractPotentiation = (expression) => {
-    let op_str = expression.match(/(@NEG)?\d+(\.\d+)?\^[+-]?\d+(\.\d+)?([^\^\.]|$)/);
+    let op_str = expression.match(/(@NEG)?\d+(\.\d+)?(e[+-]?\d+)?\^[+-]?\d+(\.\d+)?(e[+-]?\d+)?([^\^\.]|$)/);
     let info = {
         index_start: op_str.index,
     };
