@@ -432,3 +432,123 @@ test("simplify91: '(-0)^(2)' must return '@NEG0^2'", () => {
 test("simplify92: '(1)^(1)^(1)' must return '1^1^1'", () => {
     expect(simplify('(1)^(1)^(1)')).toBe('1^1^1');
 });
+
+// ============================================================================
+// GRUPO 16: Casos 93-97 - Potências encadeadas
+// ============================================================================
+
+test("simplify93: '2^3^2' must return '2^3^2'", () => {
+    expect(simplify('2^3^2')).toBe('2^3^2');
+});
+
+test("simplify94: '(2^3)^2' must return '8^2'", () => {
+    expect(simplify('(2^3)^2')).toBe('8^2');
+});
+
+test("simplify95: '3^(2^2)' must return '3^4'", () => {
+    expect(simplify('3^(2^2)')).toBe('3^4');
+});
+
+test("simplify96: '(2^2)^(2^2)' must return '4^4'", () => {
+    expect(simplify('(2^2)^(2^2)')).toBe('4^4');
+});
+
+test("simplify97: '2^2^2^2' must return '2^2^2^2'", () => {
+    expect(simplify('2^2^2^2')).toBe('2^2^2^2');
+});
+
+// ============================================================================
+// GRUPO 17: Casos 98-102 - Notação científica negativa
+// ============================================================================
+
+test("simplify98: '(-1e2)^2' must return '@NEG1e2^2'", () => {
+    expect(simplify('(-1e2)^2')).toBe('@NEG1e2^2');
+});
+
+test("simplify99: '(-2.5e1)^(3)' must return '@NEG2.5e1^3'", () => {
+    expect(simplify('(-2.5e1)^(3)')).toBe('@NEG2.5e1^3');
+});
+
+test("simplify100: '(-1e-2)^(2)' must return '@NEG1e-2^2'", () => {
+    expect(simplify('(-1e-2)^(2)')).toBe('@NEG1e-2^2');
+});
+
+test("simplify101: '(1e2+-1e1)^2' must return '+90^2'", () => {
+    expect(simplify('(1e2+-1e1)^2')).toBe('+90^2');
+});
+
+test("simplify102: '[-3e1]^{2}' must return '@NEG3e1^2'", () => {
+    expect(simplify('[-3e1]^{2}')).toBe('@NEG3e1^2');
+});
+
+// ============================================================================
+// GRUPO 18: Casos 103-107 - Decimais longos e precisão
+// ============================================================================
+
+test("simplify103: '(3.14159)^(2)' must return '3.14159^2'", () => {
+    expect(simplify('(3.14159)^(2)')).toBe('3.14159^2');
+});
+
+test("simplify104: '(2.718)^(3.14)' must return '2.718^3.14'", () => {
+    expect(simplify('(2.718)^(3.14)')).toBe('2.718^3.14');
+});
+
+test("simplify105: '(0.123456789)^(2)' must return '0.123456789^2'", () => {
+    expect(simplify('(0.123456789)^(2)')).toBe('0.123456789^2');
+});
+
+test("simplify106: '(10.5+2.3)^(1.5)' must return '+12.8^1.5'", () => {
+    expect(simplify('(10.5+2.3)^(1.5)')).toBe('+12.8^1.5');
+});
+
+test("simplify107: '{3.333}^[2.5]' must return '3.333^2.5'", () => {
+    expect(simplify('{3.333}^[2.5]')).toBe('3.333^2.5');
+});
+
+// ============================================================================
+// GRUPO 19: Casos 108-112 - Casos especiais com zero
+// ============================================================================
+
+test("simplify108: '(0+0)^(0)' must return '0^0'", () => {
+    expect(simplify('(0+0)^(0)')).toBe('0^0');
+});
+
+test("simplify109: '(5-5)^(10)' must return '0^10'", () => {
+    expect(simplify('(5-5)^(10)')).toBe('0^10');
+});
+
+test("simplify110: '0^(2+3)' must return '0^+5'", () => {
+    expect(simplify('0^(2+3)')).toBe('0^+5');
+});
+
+test("simplify111: '(0)^(0)' must return '0^0'", () => {
+    expect(simplify('(0)^(0)')).toBe('0^0');
+});
+
+test("simplify112: '[0*5]^{3}' must return '0^3'", () => {
+    expect(simplify('[0*5]^{3}')).toBe('0^3');
+});
+
+// ============================================================================
+// GRUPO 20: Casos 113-117 - Expressões mistas complexas
+// ============================================================================
+
+test("simplify113: '(2e1+3)^(2)+(5-2)^(3)' must return '+23^2++3^3'", () => {
+    expect(simplify('(2e1+3)^(2)+(5-2)^(3)')).toBe('+23^2++3^3');
+});
+
+test("simplify114: '{[(1e2/2)]}^(2)' must return '+50^2'", () => {
+    expect(simplify('{[(1e2/2)]}^(2)')).toBe('+50^2');
+});
+
+test("simplify115: '(-1e1+5)^(2)*[3-1]' must return '@NEG5^2*+2'", () => {
+    expect(simplify('(-1e1+5)^(2)*[3-1]')).toBe('@NEG5^2*+2');
+});
+
+test("simplify116: '2^(1+1)^(1+1)' must return '2^+2^+2'", () => {
+    expect(simplify('2^(1+1)^(1+1)')).toBe('2^+2^+2');
+});
+
+test("simplify117: '((3.5e1-5)/2)^{3}' must return '+15^3'", () => {
+    expect(simplify('((3.5e1-5)/2)^{3}')).toBe('+15^3');
+});
