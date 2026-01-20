@@ -1,7 +1,6 @@
 const mathResolver = require('../../src/eval-expression/eval-expression');
 const evalExpression = mathResolver.evalExpression;
 test(`evalExpression {-2[9.4/8.0]6-4/(5-3)-8} must return 2*6*8`, () => {
-    mathResolver.settings.to_fi
     expect(evalExpression('{-2[9.4/8.0]6-4/(5-3)-8}')).toBe('-24.1');
 });
 

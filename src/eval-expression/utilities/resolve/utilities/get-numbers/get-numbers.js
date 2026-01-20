@@ -22,36 +22,46 @@ const getSigns = require(`./utilities/get-signs`);
  * @requires ./utilities/get-signs
  */
 const getNumbers = (str, index) => {
-    let  numbers =  [``, ``];
-    let indexs = [index,index];
+    let numbers = [``, ``];
+    let indexs = [index, index];
     indexs[0]--;
-    while(/[0-9\.]/.test(str[indexs[0]])){
+    while (/[0-9]|\./.test(str[indexs[0]])) {
         numbers[0] = `${str[indexs[0]]}${numbers[0]}`;
-        if((/[+-]/.test(str[indexs[0] - 1]) && /[eE]/.test(str[indexs[0] - 2])) || /[eE]/.test(str[indexs[0] - 1])){
-            numbers[0] = `${str[indexs[0] -2]}${str[indexs[0] - 1]}${numbers[0]}`;
-            indexs[0] -= 3;
-        }else{
+        indexs[0]--;
+    }
+    if ((/[eE]/.test(str[indexs[0]]) || (/[-+]/.test(str[indexs[0]]) && /[eE]/.test(str[indexs[0] - 1]) && str[indexs[0] - 1] !== undefined)) && str[indexs[0]] !== undefined ) {
+        numbers[0] = `${str[indexs[0]]}${numbers[0]}`;
+        indexs[0]--;
+        numbers[0] = `${str[indexs[0]]}${numbers[0]}`;
+        indexs[0]--;
+        while (/[0-9\.]/.test(str[indexs[0]])) {
+            numbers[0] = `${str[indexs[0]]}${numbers[0]}`;
             indexs[0]--;
         }
     }
     indexs[0]++;
-    let signs = getSigns(str,indexs[0], index);
-    if(/[-+]/.test(str[index + 1])){
+    console.log(`The str is: ${str} and the number one is: ${numbers[0]}`);
+    let signs = getSigns(str, indexs[0], index);
+    if (/[-+]/.test(str[index + 1])) {
         str = `${str.slice(0, index + 1)}${str.slice(index + 2)}`;
     }
     indexs[1]++;
-    while(/[\d\.]/.test(str[indexs[1]])){
-        numbers[1] += `${str[indexs[1]]}`;
-        if(/[eE]/.test(str[indexs[1] + 1])){ // sempre que tem um e tem que ter pelo menos um número depois, ou um sinal que também faz parte do número
-            numbers[1] += `${str[indexs[1] + 1]}`;
-            numbers[1] += `${str[indexs[1] + 2]}`;
-            indexs[1] += 3;
-        }
-        else{
+    while (/[0-9\.]/.test(str[indexs[1]])) {
+        numbers[1] += `${str[indexs[1]]}`
+        indexs[1]++;
+    }
+
+    if ((/[eE]/.test(str[indexs[1]]) || (/[-+]/.test(str[indexs[1]]) && /[eE]/.test(str[indexs[1] + 1]) && str[indexs[1] + 1] !== undefined)) && str[indexs[1]] !== undefined) {
+        numbers[1] += `${str[indexs[1]]}`
+        indexs[1]++;
+        numbers[1] += `${str[indexs[1]]}`
+        indexs[1]++;
+        while (/[0-9\.]/.test(str[indexs[1]])) {
+            numbers[1] += `${str[indexs[1]]}`;
             indexs[1]++;
         }
     }
-    for(let i = 0; i < 2; i++){
+    for (let i = 0; i < 2; i++) {
         numbers[i] = Number(`${signs[i]}${numbers[i]}`);
     }
     return numbers;

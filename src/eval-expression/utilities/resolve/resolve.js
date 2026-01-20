@@ -27,7 +27,6 @@ const resolve =  (expression) =>{
     if(!/[+\-/*/^]/.test(expression.slice(1))){
         return expression;
     }
-    let show = false; 
     while(/[+\-/*\^]/.test(expression.slice(1))){
         if(/[+-]?\d+(\.\d+)?e[+-]?\d+/.test(expression)){
             let verify_str = expression.match(/[+-]?\d+(\.\d+)?e[+-]?\d+/);
