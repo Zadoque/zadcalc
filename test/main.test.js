@@ -127,14 +127,14 @@ test(`evalExpression with mismatched brackets`, () => {
 test(`evalExpression with invalid frac_mode setting`, () => {
     mathResolver.settings.frac_mode = true;
     mathResolver.settings.return_as_string = false;
-    expect(evalExpression(`1/2`)).toBe(`Settings Error! frac mode just work when return_as_string is true`);
+    expect(evalExpression(`1/2`)).toBe(`Settings Error! frac mode only works when return_as_string is true`);
 });
 
 test(`evalExpression with invalid positive_sign setting`, () => {
     mathResolver.settings.frac_mode = false;
     mathResolver.settings.positive_sign = true;
     mathResolver.settings.return_as_string = false;
-    expect(evalExpression(`5`)).toBe(`Settings Error! positve_sign just work when return as string is true`);
+    expect(evalExpression(`5`)).toBe(`Settings Error! positve_sign just works when return as string is true`);
 });
 
 // Large Numbers

@@ -12,6 +12,7 @@ const decimalToFrac = require(`./utilities/decimal-to-frac/decimal-to-frac`);
 /**
  * @typedef {Object} MathResolverSettings
  * @property {number} to_fixed - Number of decimal places to round results to.
+ * @property {boolean} smart_to_fixed - whether to set fixed in a smart way or use to_fixed value
  * @property {boolean} frac_mode - Whether to convert decimal results to fractions.
  * @property {boolean} positive_sign - Whether to show positive signs (+) in results.
  * @property {boolean} return_as_string - Whether to return results as strings.
@@ -23,18 +24,20 @@ const decimalToFrac = require(`./utilities/decimal-to-frac/decimal-to-frac`);
  * @property {MathResolverSettings} settings - Configuration options for expression evaluation.
  */
 let mathResolver = {
-    settings : {
+    settings: {
         to_fixed: 5,
+        smart_to_fixed: true,
         frac_mode: false,
         positive_sign: false,
-        return_as_string: true
+        return_as_string: true,
+        always_return_sci_notation: false
     }
 };
 /**
  * Evaluates a mathematical expression based on the current settings.
  *
  * @function
- * @param {string|number} expression - The mathematical expression to evaluate. Supports basic operations, fractions, and nested brackets `{}`, `[]`, `()`.
+ * @param {string|number} expression - The mathematical expression to evaluate. Supports basic operations, fractions, exponatiation, scientific noatation and nested brackets `{}`, `[]`, `()`.
  * @returns {string|number} The evaluated result, returned as a string or number based on settings.
  * @throws {Error} Throws an error if there is a syntax issue or invalid settings.
  *
@@ -48,48 +51,56 @@ let mathResolver = {
  */
 mathResolver.evalExpression = (expression) => {
     expression = expression.toString();
-    if(mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string){
-        return `Settings Error! frac mode just work when return_as_string is true`;
+    if (mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string) {
+        return `Settings Error! frac mode only works when return_as_string is true`;
     }
-    if(mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string){
-        return `Settings Error! positve_sign just work when return as string is true`;
+    if (mathResolver.settings.frac_mode && mathResolver.settings.always_return_sci_notation) {
+        return `Settings Error!: frac mode and sci notation are true, but you can choose just one of them, turn off one and try again!`;
     }
-    if( isValid(expression)){
-        if(/[{([]/.test(expression)){
+    if (mathResolver.settings.always_return_sci_notation && !mathResolver.settings.return_as_string) {
+        return `Settings Error!: Always return sci notation only works when retur as string is true `;
+    }
+    if (mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string) {
+        return `Settings Error! positve_sign just works when return as string is true`;
+    }
+    if (isValid(expression)) {
+        if (/[{([]/.test(expression)) {
             expression = implicitMultiplication(expression);
             expression = removeUnnecessary(expression);
-            if(/[{([]/.test(expression)){
+            if (/[{([]/.test(expression)) {
                 expression = simplify(expression);
                 expression = resolve(expression);
-            } else{
+            } else {
                 expression = resolve(expression);
             }
         } else {
             expression = resolve(expression);
         }
-        if( expression === `Error! division by zero`){
+        if (expression === `Error! division by zero` || expression == "Error! 0 in potation of 0") {
             return expression;
         }
-        if(Number(expression) !== Math.floor(Number(expression)) ){
-            if(mathResolver.settings.frac_mode){
+        if (Number(expression) !== Math.floor(Number(expression))) {
+            if (mathResolver.settings.frac_mode) {
                 expression = decimalToFrac(expression);
+            } else if (/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)) {
+                return expression;
+            } else if (mathResolver.settings.always_return_sci_notation) {
+                return `still working on it.`;
             } else {
-                if(/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)){
-                    return expression;
-                }
                 let len = expression.split(`.`)[1].length;
-                if(len > mathResolver.settings.to_fixed){
+                if (len > mathResolver.settings.to_fixed) {
                     expression = `${Number(expression).toFixed(mathResolver.settings.to_fixed)}`;
                 }
             }
+
         }
-        if(Number(expression) > 0 && expression[0] !== `+` && mathResolver.settings.positive_sign){
+        if (Number(expression) > 0 && expression[0] !== `+` && mathResolver.settings.positive_sign) {
             expression = `+${expression}`;
         }
-        if(!mathResolver.settings.positive_sign && expression[0] === `+`){
+        if (!mathResolver.settings.positive_sign && expression[0] === `+`) {
             expression = expression.slice(1);
         }
-        if(!mathResolver.settings.return_as_string){
+        if (!mathResolver.settings.return_as_string) {
             return Number(expression);
         }
         return expression;
