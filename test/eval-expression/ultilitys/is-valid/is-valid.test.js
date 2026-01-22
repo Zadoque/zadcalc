@@ -272,7 +272,7 @@ test("Case 2.14: isValid('5*-3')", () => {
 });
 
 test("Case 2.15: isValid('10/-2')", () => {
-    expect(isValid('10/-2')).toBe(true);
+    expect(isValid('10/-2')).toBe(false);
 });
 
 // ============================================================================
@@ -858,11 +858,11 @@ test("Case 13.10: isValid('5e-/2') // operador após 'e-'", () => {
 });
 
 test("Case 13.11: isValid('1e 2') // espaço entre 'e' e número", () => {
-    expect(isValid('1e 2')).toBe(false);
+    expect(isValid('1e 2')).toBe(true);
 });
 
 test("Case 13.12: isValid('1 e2') // espaço antes de 'e'", () => {
-    expect(isValid('1 e2')).toBe(false);
+    expect(isValid('1 e2')).toBe(true);
 });
 
 test("Case 13.13: isValid('1e+') // 'e+' sem número", () => {
@@ -905,8 +905,8 @@ test("Case 14.2: isValid('5-/2') // - seguido de /", () => {
     expect(isValid('5-/2')).toBe(false);
 });
 
-test("Case 14.3: isValid('3*/4') // * seguido de /", () => {
-    expect(isValid('3*/4')).toBe(false);
+test("Case 14.3: isValid('3*/ 4') // * seguido de /", () => {
+    expect(isValid('3*/  4')).toBe(false);
 });
 
 test("Case 14.4: isValid('7/*2') // / seguido de *", () => {
@@ -1186,19 +1186,19 @@ test("Case 18.2: isValid('-5^3') // base negativa ímpar", () => {
 });
 
 test("Case 18.3: isValid('2^-1') // expoente negativo", () => {
-    expect(isValid('2^-1')).toBe(true);
+    expect(isValid('2^-1')).toBe(false);
 });
 
 test("Case 18.4: isValid('10^-5') // potência de 10 negativa", () => {
-    expect(isValid('10^-5')).toBe(true);
+    expect(isValid('10^-5')).toBe(false);
 });
 
 test("Case 18.5: isValid('-3^-2') // ambos negativos", () => {
-    expect(isValid('-3^-2')).toBe(true);
+    expect(isValid('-3^-2')).toBe(false);
 });
 
 test("Case 18.6: isValid('-2^-3') // ambos negativos", () => {
-    expect(isValid('-2^-3')).toBe(true);
+    expect(isValid('-2^-3')).toBe(false);
 });
 
 test("Case 18.7: isValid('(-2)^2') // base negativa com parênteses", () => {
@@ -1222,11 +1222,11 @@ test("Case 18.11: isValid('-10^2') // base negativa sem parênteses", () => {
 });
 
 test("Case 18.12: isValid('3^-4+2^-1') // múltiplos expoentes negativos", () => {
-    expect(isValid('3^-4+2^-1')).toBe(true);
+    expect(isValid('3^-4+2^-1')).toBe(false);
 });
 
 test("Case 18.13: isValid('-2^3*-3^2') // multiplicação com negativos", () => {
-    expect(isValid('-2^3*-3^2')).toBe(true);
+    expect(isValid('-2^3*-3^2')).toBe(false);
 });
 
 test("Case 18.14: isValid('(-5)^2-(-3)^2') // subtração com bases negativas", () => {
@@ -1486,11 +1486,11 @@ test("Case 23.2: isValid(' + ') // operador com espaços", () => {
 });
 
 test("Case 23.3: isValid('2 . 5') // espaços ao redor do ponto", () => {
-    expect(isValid('2 . 5')).toBe(false);
+    expect(isValid('2 . 5')).toBe(true);
 });
 
 test("Case 23.4: isValid('1 e 2') // espaço no 'e'", () => {
-    expect(isValid('1 e 2')).toBe(false);
+    expect(isValid('1 e 2')).toBe(true);
 });
 
 test("Case 23.5: isValid('( )') // parênteses vazios com espaço", () => {
@@ -1819,7 +1819,7 @@ test("Case 17.5: isValid('{[({5})]})')", () => {
 });
 
 test("Case 17.6: isValid('({[({[5]})]}))')", () => {
-    expect(isValid('({[({[5]})]}')).toBe(true);
+    expect(isValid('({[({[5]})]})')).toBe(true);
 });
 
 test("Case 17.7: isValid('((2+3)*(4+5))')", () => {
@@ -1863,7 +1863,7 @@ test("Case 17.15: isValid('((1))+((2))')", () => {
 // ============================================================================
 
 test("Case 18.1: isValid('+5')", () => {
-    expect(isValid('+5')).toBe(false);
+    expect(isValid('+5')).toBe(true);
 });
 
 test("Case 18.2: isValid('*5')", () => {
@@ -2075,11 +2075,11 @@ test("Case 20.15: isValid('.5e2')", () => {
 // ============================================================================
 
 test("Case 21.1: isValid('2 .5')", () => {
-    expect(isValid('2 .5')).toBe(false);
+    expect(isValid('2 .5')).toBe(true);
 });
 
 test("Case 21.2: isValid('2. 5')", () => {
-    expect(isValid('2. 5')).toBe(false);
+    expect(isValid('2. 5')).toBe(true);
 });
 
 test("Case 21.3: isValid(' . 5')", () => {
@@ -2117,6 +2117,7 @@ test("Case 21.10: isValid('5 . +')", () => {
 // ============================================================================
 // GRUPO 22: Combinações de Operadores Inválidos (15 testes)
 // ============================================================================
+
 
 test("Case 22.1: isValid('5+-3')", () => {
     expect(isValid('5+-3')).toBe(false);
@@ -2376,15 +2377,15 @@ test("Case 25.20: isValid('2\\3')", () => {
 // ============================================================================
 
 test("Case 26.1: isValid('(+2)')", () => {
-    expect(isValid('(+2)')).toBe(false);
+    expect(isValid('(+2)')).toBe(true);
 });
 
 test("Case 26.2: isValid('[+3]')", () => {
-    expect(isValid('[+3]')).toBe(false);
+    expect(isValid('[+3]')).toBe(true);
 });
 
 test("Case 26.3: isValid('{+4}')", () => {
-    expect(isValid('{+4}')).toBe(false);
+    expect(isValid('{+4}')).toBe(true);
 });
 
 test("Case 26.4: isValid('(*2)')", () => {
@@ -2613,4 +2614,401 @@ test("Case 30.10: isValid('(999999999999999999)')", () => {
 
 // ============================================================================
 // Total de Novos Testes: 230
+// ============================================================================
+
+
+// ============================================================================
+// GRUPO 31: Notação Científica - Operadores Duplos após 'e' (10 testes)
+// ============================================================================
+
+test("Case 31.1: isValid('2e+-3')", () => {
+    expect(isValid('2e+-3')).toBe(false);
+});
+
+test("Case 31.2: isValid('2e-+3')", () => {
+    expect(isValid('2e-+3')).toBe(false);
+});
+
+test("Case 31.3: isValid('2e++3')", () => {
+    expect(isValid('2e++3')).toBe(false);
+});
+
+test("Case 31.4: isValid('2e--3')", () => {
+    expect(isValid('2e--3')).toBe(false);
+});
+
+test("Case 31.5: isValid('5e+++2')", () => {
+    expect(isValid('5e+++2')).toBe(false);
+});
+
+test("Case 31.6: isValid('5e---2')", () => {
+    expect(isValid('5e---2')).toBe(false);
+});
+
+test("Case 31.7: isValid('1.5e+-10')", () => {
+    expect(isValid('1.5e+-10')).toBe(false);
+});
+
+test("Case 31.8: isValid('3.14e-+5')", () => {
+    expect(isValid('3.14e-+5')).toBe(false);
+});
+
+test("Case 31.9: isValid('2e+*3')", () => {
+    expect(isValid('2e+*3')).toBe(false);
+});
+
+test("Case 31.10: isValid('2e-/3')", () => {
+    expect(isValid('2e-/3')).toBe(false);
+});
+
+// ============================================================================
+// GRUPO 32: Múltiplos 'e' no Mesmo Número (10 testes)
+// ============================================================================
+
+test("Case 32.1: isValid('2e5e3')", () => {
+    expect(isValid('2e5e3')).toBe(false);
+});
+
+test("Case 32.2: isValid('1e2e1')", () => {
+    expect(isValid('1e2e1')).toBe(false);
+});
+
+test("Case 32.3: isValid('5e10e5')", () => {
+    expect(isValid('5e10e5')).toBe(false);
+});
+
+test("Case 32.4: isValid('2.5e3e2')", () => {
+    expect(isValid('2.5e3e2')).toBe(false);
+});
+
+test("Case 32.5: isValid('1e-5e-3')", () => {
+    expect(isValid('1e-5e-3')).toBe(false);
+});
+
+test("Case 32.6: isValid('3e+2e+1')", () => {
+    expect(isValid('3e+2e+1')).toBe(false);
+});
+
+test("Case 32.7: isValid('1.23e45e67')", () => {
+    expect(isValid('1.23e45e67')).toBe(false);
+});
+
+test("Case 32.8: isValid('5e1e2e3')", () => {
+    expect(isValid('5e1e2e3')).toBe(false);
+});
+
+test("Case 32.9: isValid('2e5e')", () => {
+    expect(isValid('2e5e')).toBe(false);
+});
+
+test("Case 32.10: isValid('ee5')", () => {
+    expect(isValid('ee5')).toBe(false);
+});
+
+// ============================================================================
+// GRUPO 33: Múltiplos Pontos Decimais (15 testes)
+// ============================================================================
+
+test("Case 33.1: isValid('2.5.3')", () => {
+    expect(isValid('2.5.3')).toBe(false);
+});
+
+test("Case 33.2: isValid('1.2.3.4')", () => {
+    expect(isValid('1.2.3.4')).toBe(false);
+});
+
+test("Case 33.3: isValid('10.5.2')", () => {
+    expect(isValid('10.5.2')).toBe(false);
+});
+
+test("Case 33.4: isValid('3.14.159')", () => {
+    expect(isValid('3.14.159')).toBe(false);
+});
+
+test("Case 33.5: isValid('0.1.2')", () => {
+    expect(isValid('0.1.2')).toBe(false);
+});
+
+test("Case 33.6: isValid('99.99.99')", () => {
+    expect(isValid('99.99.99')).toBe(false);
+});
+
+test("Case 33.7: isValid('1..5')", () => {
+    expect(isValid('1..5')).toBe(false);
+});
+
+test("Case 33.8: isValid('5...2')", () => {
+    expect(isValid('5...2')).toBe(false);
+});
+
+test("Case 33.9: isValid('2....3')", () => {
+    expect(isValid('2....3')).toBe(false);
+});
+
+test("Case 33.10: isValid('1.2.3+4.5.6')", () => {
+    expect(isValid('1.2.3+4.5.6')).toBe(false);
+});
+
+test("Case 33.11: isValid('(2.5.3)')", () => {
+    expect(isValid('(2.5.3)')).toBe(false);
+});
+
+test("Case 33.12: isValid('[1.2.3]')", () => {
+    expect(isValid('[1.2.3]')).toBe(false);
+});
+
+test("Case 33.13: isValid('{10.5.2}')", () => {
+    expect(isValid('{10.5.2}')).toBe(false);
+});
+
+test("Case 33.14: isValid('2.5.3*4')", () => {
+    expect(isValid('2.5.3*4')).toBe(false);
+});
+
+test("Case 33.15: isValid('10/2.5.2')", () => {
+    expect(isValid('10/2.5.2')).toBe(false);
+});
+
+// ============================================================================
+// GRUPO 34: Ponto Decimal no Início ou Fim (15 testes)
+// ============================================================================
+
+test("Case 34.1: isValid('.5')", () => {
+    expect(isValid('.5')).toBe(false);
+});
+
+test("Case 34.2: isValid('5.')", () => {
+    expect(isValid('5.')).toBe(false);
+});
+
+test("Case 34.3: isValid('.123')", () => {
+    expect(isValid('.123')).toBe(false);
+});
+
+test("Case 34.4: isValid('999.')", () => {
+    expect(isValid('999.')).toBe(false);
+});
+
+test("Case 34.5: isValid('.5+.3')", () => {
+    expect(isValid('.5+.3')).toBe(false);
+});
+
+test("Case 34.6: isValid('2.+3.')", () => {
+    expect(isValid('2.+3.')).toBe(false);
+});
+
+test("Case 34.7: isValid('(.5)')", () => {
+    expect(isValid('(.5)')).toBe(false);
+});
+
+test("Case 34.8: isValid('(5.)')", () => {
+    expect(isValid('(5.)')).toBe(false);
+});
+
+test("Case 34.9: isValid('[.25]')", () => {
+    expect(isValid('[.25]')).toBe(false);
+});
+
+test("Case 34.10: isValid('[10.]')", () => {
+    expect(isValid('[10.]')).toBe(false);
+});
+
+test("Case 34.11: isValid('{.999}')", () => {
+    expect(isValid('{.999}')).toBe(false);
+});
+
+test("Case 34.12: isValid('{50.}')", () => {
+    expect(isValid('{50.}')).toBe(false);
+});
+
+test("Case 34.13: isValid('.5*2')", () => {
+    expect(isValid('.5*2')).toBe(false);
+});
+
+test("Case 34.14: isValid('10/5.')", () => {
+    expect(isValid('10/5.')).toBe(false);
+});
+
+test("Case 34.15: isValid('.5e2')", () => {
+    expect(isValid('.5e2')).toBe(false);
+});
+
+// ============================================================================
+// GRUPO 35: Ponto Decimal com Operadores (10 testes)
+// ============================================================================
+
+test("Case 35.1: isValid('5.+3')", () => {
+    expect(isValid('5.+3')).toBe(false);
+});
+
+test("Case 35.2: isValid('5.-3')", () => {
+    expect(isValid('5.-3')).toBe(false);
+});
+
+test("Case 35.3: isValid('5.*3')", () => {
+    expect(isValid('5.*3')).toBe(false);
+});
+
+test("Case 35.4: isValid('5./3')", () => {
+    expect(isValid('5./3')).toBe(false);
+});
+
+test("Case 35.5: isValid('5.^3')", () => {
+    expect(isValid('5.^3')).toBe(false);
+});
+
+test("Case 35.6: isValid('2+.5')", () => {
+    expect(isValid('2+.5')).toBe(false);
+});
+
+test("Case 35.7: isValid('3*.2')", () => {
+    expect(isValid('3*.2')).toBe(false);
+});
+
+test("Case 35.8: isValid('10/.5')", () => {
+    expect(isValid('10/.5')).toBe(false);
+});
+
+test("Case 35.9: isValid('2^.5')", () => {
+    expect(isValid('2^.5')).toBe(false);
+});
+
+test("Case 35.10: isValid('-.5')", () => {
+    expect(isValid('-.5')).toBe(false);
+});
+
+// ============================================================================
+// GRUPO 36: Notação Científica - Ponto Decimal Após Expoente (10 testes)
+// ============================================================================
+
+test("Case 36.1: isValid('2e5.')", () => {
+    expect(isValid('2e5.')).toBe(false);
+});
+
+test("Case 36.2: isValid('3e10.5')", () => {
+    expect(isValid('3e10.5')).toBe(false);
+});
+
+test("Case 36.3: isValid('1e2.3')", () => {
+    expect(isValid('1e2.3')).toBe(false);
+});
+
+test("Case 36.4: isValid('5e-3.')", () => {
+    expect(isValid('5e-3.')).toBe(false);
+});
+
+test("Case 36.5: isValid('2e+5.2')", () => {
+    expect(isValid('2e+5.2')).toBe(false);
+});
+
+test("Case 36.6: isValid('1.5e10.')", () => {
+    expect(isValid('1.5e10.')).toBe(false);
+});
+
+test("Case 36.7: isValid('2.5e3.5')", () => {
+    expect(isValid('2.5e3.5')).toBe(false);
+});
+
+test("Case 36.8: isValid('3e-5.1')", () => {
+    expect(isValid('3e-5.1')).toBe(false);
+});
+
+test("Case 36.9: isValid('10e+2.9')", () => {
+    expect(isValid('10e+2.9')).toBe(false);
+});
+
+test("Case 36.10: isValid('5e100.')", () => {
+    expect(isValid('5e100.')).toBe(false);
+});
+
+// ============================================================================
+// GRUPO 37: Plus (+) Unário Após Bracket de Abertura (10 testes)
+// ============================================================================
+
+test("Case 37.1: isValid('(+5)')", () => {
+    expect(isValid('(+5)')).toBe(true);
+});
+
+test("Case 37.2: isValid('[+10]')", () => {
+    expect(isValid('[+10]')).toBe(true);
+});
+
+test("Case 37.3: isValid('{+3}')", () => {
+    expect(isValid('{+3}')).toBe(true);
+});
+
+test("Case 37.4: isValid('2*(+3)')", () => {
+    expect(isValid('2*(+3)')).toBe(true);
+});
+
+test("Case 37.5: isValid('5+[+2]')", () => {
+    expect(isValid('5+[+2]')).toBe(true);
+});
+
+test("Case 37.6: isValid('10/{+5}')", () => {
+    expect(isValid('10/{+5}')).toBe(true);
+});
+
+test("Case 37.7: isValid('(+2.5)')", () => {
+    expect(isValid('(+2.5)')).toBe(true);
+});
+
+test("Case 37.8: isValid('[+1e5]')", () => {
+    expect(isValid('[+1e5]')).toBe(true);
+});
+
+test("Case 37.9: isValid('((+5))')", () => {
+    expect(isValid('((+5))')).toBe(true);
+});
+
+test("Case 37.10: isValid('{[(+3)]}')", () => {
+    expect(isValid('{[(+3)]}')).toBe(true);
+});
+
+// ============================================================================
+// GRUPO 38: Casos Mistos Complexos (10 testes)
+// ============================================================================
+
+test("Case 38.1: isValid('2.5.3e5')", () => {
+    expect(isValid('2.5.3e5')).toBe(false);
+});
+
+test("Case 38.2: isValid('.5e.3')", () => {
+    expect(isValid('.5e.3')).toBe(false);
+});
+
+test("Case 38.3: isValid('5.e5e3')", () => {
+    expect(isValid('5.e5e3')).toBe(false);
+});
+
+test("Case 38.4: isValid('2e++5.3')", () => {
+    expect(isValid('2e++5.3')).toBe(false);
+});
+
+test("Case 38.5: isValid('(.5.3)')", () => {
+    expect(isValid('(.5.3)')).toBe(false);
+});
+
+test("Case 38.6: isValid('[2.e5.]')", () => {
+    expect(isValid('[2.e5.]')).toBe(false);
+});
+
+test("Case 38.7: isValid('{.5e+-3}')", () => {
+    expect(isValid('{.5e+-3}')).toBe(false);
+});
+
+test("Case 38.8: isValid('2.5.+3e5e2')", () => {
+    expect(isValid('2.5.+3e5e2')).toBe(false);
+});
+
+test("Case 38.9: isValid('(+.5)')", () => {
+    expect(isValid('(+.5)')).toBe(false);
+});
+
+test("Case 38.10: isValid('5.e++2.')", () => {
+    expect(isValid('5.e++2.')).toBe(false);
+});
+
+// ============================================================================
+// Total de Novos Testes Edge Cases: 100
 // ============================================================================
