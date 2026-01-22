@@ -69,7 +69,9 @@ mathResolver.evalExpression = (expression) => {
     if (mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string) {
         return `Settings Error! positve_sign just works when return as string is true`;
     }
-    if (isValid(expression)) {
+    let is_valid = isValid(expression);
+    if (is_valid[1]) {
+        expression = is_valid[0];
         if (/[{([]/.test(expression)) {
             expression = implicitMultiplication(expression);
             expression = removeUnnecessary(expression);
