@@ -53,6 +53,7 @@ let mathResolver = {
  */
 mathResolver.evalExpression = (expression) => {
     expression = expression.toString();
+    expression = expression.replace(/\s/g, '');
     if (mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string) {
         return `Settings Error! frac mode only works when return_as_string is true`;
     }
