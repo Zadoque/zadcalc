@@ -1,1 +1,1 @@
-const getSigns=(s,t,e)=>{let u=[];return 0===t?u.push("+"):/[-]/.test(s[t-1])?u.push("-"):u.push("+"),/[-]/.test(s[e+1])?u.push("-"):u.push("+"),u};module.exports=getSigns;
+const getSigns=(s,t,e)=>{let u=[];return 0===t?u.push("+"):/[-]/.test(s[t-1])&&"^"!==s[e]||/G/.test(s[t-1])?u.push("-"):u.push("+"),/[-]/.test(s[e+1])?u.push("-"):u.push("+"),u};module.exports=getSigns;

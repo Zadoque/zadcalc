@@ -1,0 +1,1 @@
+function hasLatex(t){return/\\(?:[dt]?frac|sqrt|sin|cos|tan|sec|csc|cot|arcsin|arccos|arctan|sinh|cosh|tanh|ln|log|exp|pi|Pi|tau|phi|varphi|times|cdot|div|left|right|[bB]ig[glr]?|operatorname|mathrm|mathbf|text|[,;:]|quad|qquad|[{}\[\]])/.test(t)}module.exports=hasLatex;

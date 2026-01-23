@@ -1,0 +1,1 @@
+const hasFunctions=s=>/[a-z]+\(/.test(s);module.exports=hasFunctions;

@@ -1,0 +1,1 @@
+const smartToFixed=r=>{if(null==r)return r;const t=parseFloat(r);return Number.isNaN(t)?r:parseFloat(t.toPrecision(15)).toString()};module.exports=smartToFixed;

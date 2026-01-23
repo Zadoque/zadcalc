@@ -1,1 +1,1 @@
-const compute=(e,c)=>{let a="";switch(c){case"+":a=`${e[0]+e[1]}`;break;case"-":a=""+(e[0]-e[1]);break;case"*":a=""+e[0]*e[1];break;case"/":a=""+e[0]/e[1]}return a>=0?`+${a}`:a};module.exports=compute;
+const compute=(e,a)=>{let c="";switch(a){case"^":c=`${e[0]**e[1]}`;break;case"+":c=`${e[0]+e[1]}`;break;case"-":c=""+(e[0]-e[1]);break;case"*":c=""+e[0]*e[1];break;case"/":c=""+e[0]/e[1]}return Number(c)>=0&&"^"!==a?`+${c}`:c};module.exports=compute;

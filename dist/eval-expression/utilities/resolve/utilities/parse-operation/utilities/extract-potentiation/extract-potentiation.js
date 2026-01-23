@@ -1,0 +1,1 @@
+const extractPotentiation=t=>{let e=t.match(/(@NEG)?\d+(\.\d+)?(e[+-]?\d+)?\^[+-]?\d+(\.\d+)?(e[+-]?\d+)?([^\^\.]|$)/),n={index_start:e.index};return n.index_end=n.index_start+e[0].length-(t.slice(0,n.index_start).length+e[0].length==t.length?1:2),n.index_op=n.index_start+e[0].slice(1).search(/\^/)+1,n.sign=t[n.index_op],n};module.exports=extractPotentiation;
