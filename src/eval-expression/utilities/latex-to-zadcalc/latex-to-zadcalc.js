@@ -63,10 +63,6 @@ const latexToZadcalc = (latex) => {
     expr = expr.replace(/\\text\{([^{}]+)\}/g, '$1');
     expr = expr.replace(/\\mathbf\{([^{}]+)\}/g, '$1');
 
-    // Adicione isso ANTES da FASE 3:
-    if (latex === '\\frac{2-3+4}{2^{24}-2^{23}}-\\operatorname{sen}(92-3)') {
-        console.log('ANTES FASE 3:', expr);
-    }
 
     // ========================================
     // FASE 3: FRAÇÕES (PROCESSAMENTO ROBUSTO)
@@ -115,10 +111,6 @@ const latexToZadcalc = (latex) => {
         if (expr === before) break;
     }
 
-    // E DEPOIS da FASE 3:
-    if (latex === '\\frac{2-3+4}{2^{24}-2^{23}}-\\operatorname{sen}(92-3)') {
-        console.log('DEPOIS DA FASE 3:', expr);
-    }
 
 
     // ========================================
