@@ -14,6 +14,8 @@ const hasFunctions = require('./utilities/has-functions/has-functions');
 const isValidWithFunctions = require('./utilities/is-valid-with-functions/is-valid-with-functions');
 const resolveFunctions = require('./utilities/resolve-functions/resolve-functions');
 const isValidNoFunctions = require('./utilities/is-valid-no-functions/is-valid-no-functions');
+const hasLatex = require('./utilities/has-latex/has-latex');
+const latexToZadcalc = require('./utilities/latex-to-zadcalc/latex-to-zadcalc');
 /**
  * @typedef {Object} MathResolverSettings
  * @property {number} to_fixed - Number of decimal places to round results to.
@@ -57,7 +59,6 @@ let mathResolver = {
  */
 mathResolver.evalExpression = (expression) => {
     expression = expression.toString();
-    expression = expression.replace(/\s/g, '');
     if (mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string) {
         return `Settings Error! frac mode only works when return_as_string is true`;
     }
@@ -73,6 +74,10 @@ mathResolver.evalExpression = (expression) => {
     if (mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string) {
         return `Settings Error! positve_sign just works when return as string is true`;
     }
+    if(hasLatex(expression)){
+        expression = latexToZadcalc(expression);
+    }
+    expression = expression.replace(/\s/g, '');
     if(hasConstants(expression)){
         try{
         expression = replaceConstants(expression);
