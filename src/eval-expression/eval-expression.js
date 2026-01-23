@@ -2,7 +2,7 @@
  * @module mathResolver
  * @description A mathematical expression evaluator with customizable settings.
  */
-const isValid = require(`./utilities/is-valid/is-valid`);
+
 const implicitMultiplication = require(`./utilities/implicit-multiplication/implicit-multiplication`);
 const removeUnnecessary = require(`./utilities/remove-unnecessary/remove-unnecessary`);
 const simplify = require(`./utilities/simplify/simplify`);
@@ -10,6 +10,10 @@ const resolve = require(`./utilities/resolve/resolve`);
 const decimalToFrac = require(`./utilities/decimal-to-frac/decimal-to-frac`);
 const toSciNotation = require('./utilities/to-sci-notation/to-sci-notation');
 const smartToFixed = require('./utilities/smart-to-fixed/smart-to-fixed');
+const hasFunctions = require('./utilities/has-functions/has-functions');
+const isValidWithFunctions = require('./utilities/is-valid-with-functions/is-valid-with-functions');
+const resolveFunctions = require('./utilities/resolve-functions/resolve-functions');
+const isValidNoFunctions = require('./utilities/is-valid-no-functions/is-valid-no-functions');
 /**
  * @typedef {Object} MathResolverSettings
  * @property {number} to_fixed - Number of decimal places to round results to.
@@ -69,55 +73,73 @@ mathResolver.evalExpression = (expression) => {
     if (mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string) {
         return `Settings Error! positve_sign just works when return as string is true`;
     }
-    let is_valid = isValid(expression);
-    if (is_valid[1]) {
-        expression = is_valid[0];
-        if (/[{([]/.test(expression)) {
-            expression = implicitMultiplication(expression);
-            expression = removeUnnecessary(expression);
-            if (/[{([]/.test(expression)) {
-                expression = simplify(expression);
-                expression = resolve(expression);
+    if (hasFunctions(expression)) {
+        if (isValidWithFunctions(expression)) {
+            try {
+                expression = resolveFunctions(expression);
+            } catch (error) {
+                return `Error in function: ${error.message}`;
+            }
+            if (isValidNoFunctions(expression)) {
+                expression = resolvePipeline(expression);  // ← Simplificado
             } else {
-                expression = resolve(expression);
+                return `Invalid expression after resolving functions`;
             }
         } else {
-            expression = resolve(expression);
+            return `Invalid function`;
         }
-        if (expression === `Error! division by zero` || expression == "Error! 0 in potation of 0") {
-            return expression;
-        }
-        if (Number(expression) !== Math.floor(Number(expression))) {
-            if (mathResolver.settings.frac_mode) {
-                expression = decimalToFrac(expression);
-            } else if (/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)) {
-                return expression;
-            } else if (mathResolver.settings.always_return_sci_notation) {
-                return toSciNotation(expression);
-            } else if (mathResolver.settings.smart_to_fixed) { 
-                expression = smartToFixed(expression);
-            } else {
-                let len = expression.split(`.`)[1].length;
-                if (len > mathResolver.settings.to_fixed) {
-                    expression = `${Number(expression).toFixed(mathResolver.settings.to_fixed)}`;
-                }
-            }
-
-        }
-        if (Number(expression) > 0 && expression[0] !== `+` && mathResolver.settings.positive_sign) {
-            expression = `+${expression}`;
-        }
-        if (!mathResolver.settings.positive_sign && expression[0] === `+`) {
-            expression = expression.slice(1);
-        }
-        if (!mathResolver.settings.return_as_string) {
-            return Number(expression);
-        }
-        return expression;
-
+    } else if (isValidNoFunctions(expression)) {
+        expression = resolvePipeline(expression);  // ← Simplificado
     } else {
-        return `Sintax Error`;
+        return `Invalid Expression`;
     }
+
+
+    if (expression === `Error! division by zero` || expression == "Error! 0 in potation of 0") {
+        return expression;
+    }
+    if (Number(expression) !== Math.floor(Number(expression))) {
+        if (mathResolver.settings.frac_mode) {
+            expression = decimalToFrac(expression);
+        } else if (/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)) {
+            return expression;
+        } else if (mathResolver.settings.always_return_sci_notation) {
+            return toSciNotation(expression);
+        } else if (mathResolver.settings.smart_to_fixed) {
+            expression = smartToFixed(expression);
+        } else {
+            let len = expression.split(`.`)[1].length;
+            if (len > mathResolver.settings.to_fixed) {
+                expression = `${Number(expression).toFixed(mathResolver.settings.to_fixed)}`;
+            }
+        }
+
+    }
+    if (Number(expression) > 0 && expression[0] !== `+` && mathResolver.settings.positive_sign) {
+        expression = `+${expression}`;
+    }
+    if (!mathResolver.settings.positive_sign && expression[0] === `+`) {
+        expression = expression.slice(1);
+    }
+    if (!mathResolver.settings.return_as_string) {
+        return Number(expression);
+    }
+    return expression;
 };
+
+function resolvePipeline(expression) {
+    if (!/[{([]/.test(expression)) {
+        return resolve(expression);
+    }
+
+    expression = implicitMultiplication(expression);
+    expression = removeUnnecessary(expression);
+
+    if (/[{([]/.test(expression)) {
+        expression = simplify(expression);
+    }
+
+    return resolve(expression);
+}
 
 module.exports = mathResolver;

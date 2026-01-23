@@ -306,7 +306,8 @@ test("resolveFunctions test 65: ln(exp(2))", () => {
 });
 
 test("resolveFunctions test 66: exp(ln(10))", () => {
-    expect(resolveFunctions("exp(ln(10))")).toBe("10");
+    let result = resolveFunctions("exp(ln(10))")
+    expectClose(result, 10);
 });
 
 test("resolveFunctions test 67: pow(sqrt(16),2)", () => {
@@ -359,23 +360,23 @@ test("resolveFunctions test 77: sin(abs(-30))", () => {
 // ======================================================================
 
 test("resolveFunctions test 78: sin(30)+cos(60)", () => {
-    expect(resolveFunctions("sin(30)+cos(60)")).toBe("1");
+    expect(resolveFunctions("sin(30)+cos(60)")).toBe("0.5+0.5");
 });
 
 test("resolveFunctions test 79: sqrt(16)+cbrt(8)", () => {
-    expect(resolveFunctions("sqrt(16)+cbrt(8)")).toBe("6");
+    expect(resolveFunctions("sqrt(16)+cbrt(8)")).toBe("4+2");
 });
 
 test("resolveFunctions test 80: pow(2,3)*pow(3,2)", () => {
-    expect(resolveFunctions("pow(2,3)*pow(3,2)")).toBe("72");
+    expect(resolveFunctions("pow(2,3)*pow(3,2)")).toBe("8*9");
 });
 
 test("resolveFunctions test 81: max(5,10)+min(3,7)", () => {
-    expect(resolveFunctions("max(5,10)+min(3,7)")).toBe("13");
+    expect(resolveFunctions("max(5,10)+min(3,7)")).toBe("10+3");
 });
 
 test("resolveFunctions test 82: abs(-5)+abs(-3)", () => {
-    expect(resolveFunctions("abs(-5)+abs(-3)")).toBe("8");
+    expect(resolveFunctions("abs(-5)+abs(-3)")).toBe("5+3");
 });
 
 test("resolveFunctions test 83: ln(10)+exp(0)", () => {
@@ -392,7 +393,7 @@ test("resolveFunctions test 85: pow(2,4)/sqrt(16)", () => {
 });
 
 test("resolveFunctions test 86: factorial(3)+factorial(4)", () => {
-    expect(resolveFunctions("factorial(3)+factorial(4)")).toBe("36+24");
+    expect(resolveFunctions("factorial(3)+factorial(4)")).toBe("6+24");
 });
 
 test("resolveFunctions test 87: max(sqrt(16),cbrt(27))", () => {

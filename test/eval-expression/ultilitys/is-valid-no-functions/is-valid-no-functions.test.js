@@ -1,4 +1,4 @@
-const isValidNoFunctions = require('./../../../../../../src/eval-expression/utilities/is-valid/ultilitys/is-valid-no-functions/is-valid-no-functions'); 
+const isValidNoFunctions = require('./../../../../src/eval-expression/utilities/is-valid-no-functions/is-valid-no-functions'); 
 
 // Case 1: Two signs together
 test("Case 1.1 isValidNoFunctions('++2')", () => {

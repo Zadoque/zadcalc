@@ -1,4 +1,4 @@
-const isValidWithFunctions = require("./../../../../../../src/eval-expression/utilities/is-valid/ultilitys/is-valid-with-functions/is-valid-with-functions");
+const isValidWithFunctions = require("./../../../../src/eval-expression/utilities/is-valid-with-functions/is-valid-with-functions");
 
 // ==================================================
 // SINGLE PARAMETER FUNCTIONS - VALID

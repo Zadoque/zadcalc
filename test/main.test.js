@@ -118,12 +118,12 @@ test(`evalExpression 1.5+1/2 in fraction mode`, () => {
 // Error Cases
 test(`evalExpression with invalid syntax`, () => {
 
-    expect(evalExpression(`2++2`)).toBe(`Sintax Error`);
+    expect(evalExpression(`2++2`)).toBe(`Invalid Expression`);
 });
 
 test(`evalExpression with mismatched brackets`, () => {
     mathResolver.settings.smart_to_fixed = false;
-    expect(evalExpression(`{2+3`)).toBe(`Sintax Error`);
+    expect(evalExpression(`{2+3`)).toBe(`Invalid Expression`);
 });
 
 // Settings Error Tests
@@ -154,7 +154,7 @@ test(`evalExpression 2+3*4/2-1 must return 7`, () => {
 });
 
 // Zero Division Check
-test(`evalExpression 1/0 must return Sintax Error`, () => {
+test(`evalExpression 1/0 must return Invalid Expression`, () => {
     expect(evalExpression(`1/0`)).toBe(`Error! division by zero`);
 });
 

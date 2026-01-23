@@ -169,11 +169,8 @@ function resolveOneParam(func_name, param) {
         case 'atgh':
             if (param <= -1 || param >= 1) return null;
             return Math.atanh(param);
-
-        // Outras
         case 'abs':
             return Math.abs(param);
-            break;
         case 'factorial':
         case 'fact':
             // Arredonda para remover erros de precisão
