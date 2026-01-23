@@ -38,7 +38,7 @@ const replaceConstants = (expression) => {
         } else if (/^\d+|^[\(\[\{]|^[a-z][a-z]+\(/.test(str_after)) {
             replacement = `${replacement}*`;
         }
-        expression = expression.slice(0, constant.index) + replacement + expression.slice(close_pos + 1);      
+        expression = expression.slice(0, constant.index) + replacement + expression.slice(end_pos + 1);      
     }
     return expression;
 }
