@@ -1,5 +1,6 @@
 const replaceConstants = (expression) => {
-    while(/E|PI|π|TAU|τ|PHI|φ/.test(expression)){
+    let constant_regex = /E|PI|π|TAU|τ|PHI|φ/;
+    while(constant_regex.test(expression)){
         let constant = expression.match(/E|PI|π|TAU|τ|PHI|φ/);
         let replacement = '';
         switch(constant[0]){
@@ -42,3 +43,4 @@ const replaceConstants = (expression) => {
     }
     return expression;
 }
+
