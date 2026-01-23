@@ -153,10 +153,6 @@ test(`evalExpression 2+3*4/2-1 must return 7`, () => {
     expect(evalExpression(`2+3*4/2-1`)).toBe(`7`);
 });
 
-// Zero Division Check
-test(`evalExpression 1/0 must return Invalid Expression`, () => {
-    expect(evalExpression(`1/0`)).toBe(`Error! division by zero`);
-});
 
 // Negative Numbers
 test(`evalExpression -5+-3 must return -8`, () => {

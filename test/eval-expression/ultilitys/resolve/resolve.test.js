@@ -21,9 +21,7 @@ test("resolve4: '11*-3' must return '-33'", () => {
     expect(resolve('11*-3')).toBe('-33');
 }); 
 
-test("resolve5: '11.7/0' must return 'Error! division by zero'", () => {
-    expect(resolve('11.7/0')).toBe('Error! division by zero');
-}); 
+
 
 test("resolve6: '11.7/1' must return '+11.7'", () => {
     expect(resolve('11.7/1')).toBe('+11.7');
@@ -61,8 +59,12 @@ test("resolve13: '0^5' must return '+0'", () => {
     expect(resolve('0^5')).toBe('0');
 });
 
-test("resolve14: '0^0' must return 'Error! 0 in potation of 0'", () => {
-    expect(resolve('0^0')).toBe('Error! 0 in potation of 0');
+test(`resolve5: '11.7/0' must throw division by zero error`, () => {
+    expect(() => resolve(`11.7/0`)).toThrow(/Division by zero/);
+});
+
+test(`resolve14: '0^0' must throw indeterminate form error`, () => {
+    expect(() => resolve(`0^0`)).toThrow(/Indeterminate form.*0\^0/);
 });
 
 test("resolve15: '1^100' must return '+1'", () => {

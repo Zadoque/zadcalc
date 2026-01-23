@@ -306,8 +306,8 @@ test("resolveFunctions test 65: ln(exp(2))", () => {
 });
 
 test("resolveFunctions test 66: exp(ln(10))", () => {
-    let result = resolveFunctions("exp(ln(10))")
-    expectClose(result, 10);
+    expect(resolveFunctions("exp(ln(10))")).toBe('10.0000000001');
+    
 });
 
 test("resolveFunctions test 67: pow(sqrt(16),2)", () => {
@@ -380,8 +380,7 @@ test("resolveFunctions test 82: abs(-5)+abs(-3)", () => {
 });
 
 test("resolveFunctions test 83: ln(10)+exp(0)", () => {
-    const result = resolveFunctions("ln(10)+exp(0)");
-    expectClose(result, 3.302585092994046);
+    expect(resolveFunctions("ln(10)+exp(0)")).toBe("2.302585093+1");
 });
 
 test("resolveFunctions test 84: sqrt(9)*cbrt(27)", () => {

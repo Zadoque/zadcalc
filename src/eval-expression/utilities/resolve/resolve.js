@@ -22,25 +22,39 @@ const getNumbers = require(`./utilities/get-numbers/get-numbers`);
 const parseOperation = require(`./utilities/parse-operation/parse-operation`);
 const compute = require(`./utilities/compute/compute`);
 
-const resolve =  (expression) =>{
+const resolve = (expression) => {
     let result = ``;
-    if(!/[+\-/*/^]/.test(expression.slice(1))){
+    const originalExpression = expression;  // Para mensagens de erro
+
+    if (!/[+\-/*/^]/.test(expression.slice(1))) {
         return expression;
     }
-    while(/[+\-/*\^]/.test(expression.slice(1))){
-        if(/[+-]?\d+(\.\d+)?e[+-]?\d+/.test(expression)){
+    while (/[+\-/*\^]/.test(expression.slice(1))) {
+        if (/[+-]?\d+(\.\d+)?e[+-]?\d+/.test(expression)) {
             let verify_str = expression.match(/[+-]?\d+(\.\d+)?e[+-]?\d+/);
-            if(verify_str[0].length == expression.length){
+            if (verify_str[0].length == expression.length) {
                 return expression;
             }
         }
-        let info = parseOperation(expression);       
+        let info = parseOperation(expression);
         let numbers = getNumbers(expression, info.index_op);
-        if(numbers[1] === 0 && info.sign === `/`){
-            return `Error! division by zero`;
+
+        // Validação de divisão por zero
+        if (numbers[1] === 0 && info.sign === `/`) {
+            throw new Error(
+                `Division by zero: ${numbers[0]} / 0 ` +
+                `at position ${info.index_op} ` +
+                `in expression "${originalExpression}"`
+            );
         }
-        if((numbers[0] === 0 && numbers[1] === 0) && info.sign === '^'){
-            return `Error! 0 in potation of 0`;
+
+        // Validação de 0^0
+        if ((numbers[0] === 0 && numbers[1] === 0) && info.sign === '^') {
+            throw new Error(
+                `Indeterminate form: 0^0 ` +
+                `at position ${info.index_op} ` +
+                `in expression "${originalExpression}"`
+            );
         }
         result = `${compute(numbers, info.sign)}`;
         expression = `${expression.slice(0, info.index_start)}${result}${expression.slice(info.index_end + 1)}`;

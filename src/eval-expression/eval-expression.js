@@ -81,7 +81,11 @@ mathResolver.evalExpression = (expression) => {
                 return `Error in function: ${error.message}`;
             }
             if (isValidNoFunctions(expression)) {
-                expression = resolvePipeline(expression);  // ← Simplificado
+                try {
+                    expression = resolvePipeline(expression);  // ← Simplificado
+                } catch (error) {
+                    return `Erro while trying to resolve ${expression}:\n\t${error.message}`;
+                }
             } else {
                 return `Invalid expression after resolving functions`;
             }
@@ -89,7 +93,11 @@ mathResolver.evalExpression = (expression) => {
             return `Invalid function`;
         }
     } else if (isValidNoFunctions(expression)) {
-        expression = resolvePipeline(expression);  // ← Simplificado
+        try {
+            expression = resolvePipeline(expression);  // ← Simplificado
+        } catch (error) {
+            return `Erro while trying to resolve ${expression}:\n\t${error.message}`;
+        }
     } else {
         return `Invalid Expression`;
     }
