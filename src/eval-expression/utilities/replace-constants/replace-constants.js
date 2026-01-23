@@ -31,7 +31,7 @@ const replaceConstants = (expression) => {
 
         // Adiciona multiplicação implícita
         if (/[\)\]\}\d]/.test(char_before)) {
-            if (/^[\(\[\{]|^[a-z][a-z]+\(/.test(str_after)) {
+            if (/^\d+|^[\(\[\{]|^[a-z][a-z]+\(/.test(str_after)) {
                 replacement = `*${replacement}*`;
             } else {
                 replacement = `*${replacement}`;
@@ -44,3 +44,4 @@ const replaceConstants = (expression) => {
     return expression;
 }
 
+module.exports = replaceConstants;
