@@ -24,7 +24,7 @@ const replaceConstants = (expression) => {
         }
           // Substitui função pelo resultado (mantém multiplicação implícita)
         const char_before = constant.index > 0 ? expression[constant.index - 1] : '';
-        let end_pos = (constant.index + constant[0].length - 1)
+        let end_pos = (constant.index + constant[0].length - 1);
         const str_after = end_pos < (expression.length - 1) ? expression.slice(end_pos + 1) : '';
 
 
