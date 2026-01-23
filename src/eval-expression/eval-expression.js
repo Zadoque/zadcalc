@@ -73,6 +73,13 @@ mathResolver.evalExpression = (expression) => {
     if (mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string) {
         return `Settings Error! positve_sign just works when return as string is true`;
     }
+    if(hasConstants(expression)){
+        try{
+        expression = replaceConstants(expression);
+        } catch(error){
+            return `Error while trying to replace constants in ${expression}:\n\t ${error.message}`;
+        }
+    }
     if (hasFunctions(expression)) {
         if (isValidWithFunctions(expression)) {
             try {
@@ -135,6 +142,9 @@ mathResolver.evalExpression = (expression) => {
     return expression;
 };
 
+function hasConstants(expression){
+    return /E|PI|π|TAU|τ|PHI|φ/.test(expression);
+}
 function resolvePipeline(expression) {
     if (!/[{([]/.test(expression)) {
         return resolve(expression);
