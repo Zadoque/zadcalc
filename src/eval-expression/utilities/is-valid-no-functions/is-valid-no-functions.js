@@ -38,12 +38,12 @@ const isValidNoFunctions = (expression) => {
         return false;
     }
     const validations = [
-        /[\+\-\^\*\/]{2}(?!.*(e|E)[+-]?\d)/,  // Operadores duplos (exceto notação científica)
-        /(?<![0-9])[eE]/,                  // 'e' sem número antes
-        /[eE](?![+-]?\d)/,                 // 'e' sem expoente válido
-        /[eE][+-](?!\d)/,                  // 'e+' ou 'e-' sem dígito
-        /[eE][+-]?\d+[eE]/,                // Dois 'e' no mesmo número
-        /[eE][\+\-]?\d+\./,                 // Ponto decimal após expoente
+        /[\+\-\^\*\/]{2}(?!.*e[+-]?\d)/,  // Operadores duplos (exceto notação científica)
+        /(?<![0-9])[e]/,                  // 'e' sem número antes
+        /[e](?![+-]?\d)/,                 // 'e' sem expoente válido
+        /[e][+-](?!\d)/,                  // 'e+' ou 'e-' sem dígito
+        /[e][+-]?\d+[e]/,                // Dois 'e' no mesmo número
+        /[e][\+\-]?\d+\./,                 // Ponto decimal após expoente
         /\.(?!\d+)/,                       // Ponto sem dígitos depois
         /\.\d+\./,                         // Múltiplos pontos
         /(?<!\d)\./,                       // Ponto sem dígito antes
