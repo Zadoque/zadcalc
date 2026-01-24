@@ -72,3 +72,8 @@ test('removeUnnecessary (1/2)/(3/4) in fraction mode', () => {
     
     expect(removeUnnecessary('(1/2)/(3/4)')).toBe('1/2/(3/4)');
 });
+
+test('removeUnnecessary -(-5) must return -(-5)', () => {
+    
+    expect(removeUnnecessary('-(-5)')).toBe('-(-5)');
+});

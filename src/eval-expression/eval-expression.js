@@ -16,6 +16,7 @@ const resolveFunctions = require('./utilities/resolve-functions/resolve-function
 const isValidNoFunctions = require('./utilities/is-valid-no-functions/is-valid-no-functions');
 const hasLatex = require('./utilities/has-latex/has-latex');
 const latexToZadcalc = require('./utilities/latex-to-zadcalc/latex-to-zadcalc');
+const replaceConstants = require('./utilities/replace-constants/replace-constants');
 /**
  * @typedef {Object} MathResolverSettings
  * @property {number} to_fixed - Number of decimal places to round results to.
@@ -59,6 +60,10 @@ let mathResolver = {
  */
 mathResolver.evalExpression = (expression) => {
     expression = expression.toString();
+    var show = false;
+    if (expression === `\\pi*2`) {
+        show = true;
+    }
     if (mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string) {
         return `Settings Error! frac mode only works when return_as_string is true`;
     }
@@ -74,15 +79,27 @@ mathResolver.evalExpression = (expression) => {
     if (mathResolver.settings.positive_sign && !mathResolver.settings.return_as_string) {
         return `Settings Error! positve_sign just works when return as string is true`;
     }
-    if(hasLatex(expression)){
+    if (hasLatex(expression)) {
         expression = latexToZadcalc(expression);
+        if (show) {
+            console.log(`The expression is now: ${expression}`);
+        }
     }
     expression = expression.replace(/\s/g, '');
-    if(hasConstants(expression)){
-        try{
-        expression = replaceConstants(expression);
-        } catch(error){
+    if (hasConstants(expression)) {
+        try {
+            expression = replaceConstants(expression);
+           
+        } catch (error) {
             return `Error while trying to replace constants in ${expression}:\n\t ${error.message}`;
+        }
+         if (show) {
+                console.log(`The expression after replace by constant is now: ${expression}`);
+            }
+    }
+    else{
+        if(show){
+            console.log(`I don't know why but this is false: ${hasConstants(expression)} in ${expression}`)
         }
     }
     if (hasFunctions(expression)) {
@@ -102,7 +119,7 @@ mathResolver.evalExpression = (expression) => {
                 return `Invalid expression after resolving functions`;
             }
         } else {
-            return `Invalid function`;
+            return `Error: Invalid function`;
         }
     } else if (isValidNoFunctions(expression)) {
         try {
@@ -114,10 +131,6 @@ mathResolver.evalExpression = (expression) => {
         return `Invalid Expression`;
     }
 
-
-    if (expression === `Error! division by zero` || expression == "Error! 0 in potation of 0") {
-        return expression;
-    }
     if (Number(expression) !== Math.floor(Number(expression))) {
         if (mathResolver.settings.frac_mode) {
             expression = decimalToFrac(expression);
@@ -134,6 +147,8 @@ mathResolver.evalExpression = (expression) => {
             }
         }
 
+    } else if (mathResolver.settings.always_return_sci_notation) {
+            expression =  toSciNotation(expression)
     }
     if (Number(expression) > 0 && expression[0] !== `+` && mathResolver.settings.positive_sign) {
         expression = `+${expression}`;
@@ -147,8 +162,8 @@ mathResolver.evalExpression = (expression) => {
     return expression;
 };
 
-function hasConstants(expression){
-    return /E|PI|π|TAU|τ|PHI|φ/.test(expression);
+function hasConstants(expression) {
+    return /E|PI|π|TAU|τ|PHI|φ|ϕ/.test(expression);
 }
 function resolvePipeline(expression) {
     if (!/[{([]/.test(expression)) {

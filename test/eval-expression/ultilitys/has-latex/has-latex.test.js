@@ -18,6 +18,7 @@ describe('hasLatex', () => {
     
     test('Detecta constantes LaTeX', () => {
         expect(hasLatex('\\pi')).toBe(true);
+        expect(hasLatex('\\pi*2')).toBe(true);
         expect(hasLatex('\\tau')).toBe(true);
         expect(hasLatex('PI')).toBe(false);
         expect(hasLatex('E')).toBe(false);

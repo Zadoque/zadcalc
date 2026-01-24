@@ -552,3 +552,7 @@ test("simplify116: '2^(1+1)^(1+1)' must return '2^+2^+2'", () => {
 test("simplify117: '((3.5e1-5)/2)^{3}' must return '+15^3'", () => {
     expect(simplify('((3.5e1-5)/2)^{3}')).toBe('+15^3');
 });
+
+test("simplify118: -(-5) must return +5", ()=> {
+    expect(simplify('-(-5)')).toBe('+5');
+})

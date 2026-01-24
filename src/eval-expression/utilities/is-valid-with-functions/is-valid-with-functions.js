@@ -99,7 +99,7 @@ const isValidWithFunctions = (expression) => {
         const char_before = func_str.index > 0 ? temp_expression[func_str.index - 1] : '';
         const str_after = close_pos < (temp_expression.length - 1) ? temp_expression.slice(close_pos + 1) : '';
         if (/[\)\]\}\d]/.test(char_before)) {
-            if (/^[\(\[\{]|^[a-z][a-z]+\(/.test(str_after)) {
+            if (/^\d+|^[\(\[\{]|^[a-z][a-z]+\(/.test(str_after)) {
                 temp_expression = `${temp_expression.slice(0, func_str.index)}*1*${temp_expression.slice(close_pos + 1)}`;
             } else {
                 temp_expression = `${temp_expression.slice(0, func_str.index)}*1${temp_expression.slice(close_pos + 1)}`;

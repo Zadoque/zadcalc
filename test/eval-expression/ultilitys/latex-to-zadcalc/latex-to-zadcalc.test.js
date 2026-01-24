@@ -58,6 +58,7 @@ describe('latexToZadcalc - Notação Científica', () => {
 describe('latexToZadcalc - Constantes', () => {
     test('Converte constantes', () => {
         expect(latexToZadcalc('\\pi')).toBe('PI');
+        expect(latexToZadcalc('\\pi*2')).toBe('PI*2');
         expect(latexToZadcalc('\\Pi')).toBe('PI');
         expect(latexToZadcalc('e')).toBe('E');
         expect(latexToZadcalc('\\tau')).toBe('TAU');
