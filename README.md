@@ -322,7 +322,37 @@ mathResolver.evalExpression('1/2')
 Below is a flowchart explaining how zadcalc processes expressions:
 
 ```mermaid
-info
+flowchart TD
+    A[Your Math Expression] --> B[evalExpression]
+    B --> C{Settings Conflict?}
+    C -->|Yes| X[Return Settings Error]
+    C -->|No| D{LaTeX Format?}
+    D -->|Yes| D1[Convert LaTeX to zadcalc format]
+    D1 --> E[Replace Constants]
+    D -->|No| E
+    E --> F{Valid Expression?}
+    F -->|No| Y[Return Syntax Error]
+    F -->|Yes| G{Has Functions?}
+    G -->|Yes| H[Resolve Functions]
+    H --> I{Has Brackets?}
+    G -->|No| I
+    I -->|Yes| J[Remove Unnecessary]
+    J --> K{Still Has Brackets?}
+    K -->|Yes| L[Simplify]
+    L --> M[Resolve Operations]
+    K -->|No| M
+    I -->|No| M
+    M --> N{Division by Zero?}
+    N -->|Yes| Z[Return Division Error]
+    N -->|No| O{Domain Error?}
+    O -->|Yes| W[Return Domain Error]
+    O -->|No| P[Apply Settings]
+    P --> Q{Frac Mode?}
+    Q -->|Yes| R[Convert to Fraction]
+    Q -->|No| S[Format Number]
+    R --> T[Return Result]
+    S --> T
+    T --> U[End]
 ```
 
 ## Breaking Changes in v3.0.0
