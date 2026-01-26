@@ -15,30 +15,26 @@
  * @example
  * removeUnnecessary("((2+2))")      // returns "2+2"
  * removeUnnecessary("{[2+2]}")      // returns "2+2"
- * removeUnnecessary("2+(+2)")       // returns "2+2"
+ * removeUnnecessary("2+(+2)")       // returns "2+2
  *
  * @requires ./get-unnecessary/get-unnecessary
  */
 const getUnnecessary = require(`./get-unnecessary/get-unnecessary`);
-const removeUnnecessary  = (expression) => {
-    let remove = getUnnecessary(expression);
-    let count = 0;
-    if(remove.length > 0){
-        let before = remove[0];
-        for(let i = 0; i < remove.length ; i++){
-            if(remove[i] === 0){
-                expression = `${expression.slice(remove[i] + 1 )}`;
-            } else{
-                if(remove[i] < before){
-                    expression = `${expression.slice(0, remove[i] )}${expression.slice(remove[i] + 1 )}`;
-                }else{
-                    expression = `${expression.slice(0, remove[i] - count)}${expression.slice(remove[i] + 1 - count)}`;
-                }
-                before = remove[i];
-            }
-            count += 1;
-        }
+
+const removeUnnecessary = (expression) => {
+  let remove;
+  do {
+    remove = getUnnecessary(expression);
+    
+    if (remove.length === 2) {  // ← Sempre 2 índices (start, end)
+      const [start, end] = remove;
+      
+      // Remover os caracteres
+      expression = expression.slice(0, start) + expression.slice(start + 1, end) + expression.slice(end + 1);
     }
-    return expression;
+  } while(remove.length > 0);
+  
+  return expression;
 };
+
 module.exports = removeUnnecessary;

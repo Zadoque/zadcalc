@@ -60,10 +60,6 @@ let mathResolver = {
  */
 mathResolver.evalExpression = (expression) => {
     expression = expression.toString();
-    var show = false;
-    if (expression === `\\pi*2`) {
-        show = true;
-    }
     if (mathResolver.settings.frac_mode && !mathResolver.settings.return_as_string) {
         return `Settings Error! frac mode only works when return_as_string is true`;
     }
@@ -81,9 +77,6 @@ mathResolver.evalExpression = (expression) => {
     }
     if (hasLatex(expression)) {
         expression = latexToZadcalc(expression);
-        if (show) {
-            console.log(`The expression is now: ${expression}`);
-        }
     }
     expression = expression.replace(/\s/g, '');
     if (hasConstants(expression)) {
@@ -92,14 +85,6 @@ mathResolver.evalExpression = (expression) => {
            
         } catch (error) {
             return `Error while trying to replace constants in ${expression}:\n\t ${error.message}`;
-        }
-         if (show) {
-                console.log(`The expression after replace by constant is now: ${expression}`);
-            }
-    }
-    else{
-        if(show){
-            console.log(`I don't know why but this is false: ${hasConstants(expression)} in ${expression}`)
         }
     }
     if (hasFunctions(expression)) {
