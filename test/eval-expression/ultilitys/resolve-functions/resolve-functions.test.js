@@ -380,7 +380,7 @@ test("resolveFunctions test 82: abs(-5)+abs(-3)", () => {
 });
 
 test("resolveFunctions test 83: ln(10)+exp(0)", () => {
-    expect(resolveFunctions("ln(10)+exp(0)")).toBe("2.302585093+1");
+    expect(resolveFunctions("ln(10)+exp(0)")).toBe("2.302585092994+1");
 });
 
 test("resolveFunctions test 84: sqrt(9)*cbrt(27)", () => {

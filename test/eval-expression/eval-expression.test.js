@@ -476,7 +476,7 @@ describe('PARTE 4: Mathematical Constants (π, e, τ, φ)', () => {
 // ============================================================================
 // PARTE 5: FUNCTIONS (35 testes)
 // ============================================================================
-/*
+
 describe('PARTE 5: Mathematical Functions', () => {
     beforeEach(resetSettings);
 
@@ -608,14 +608,13 @@ describe('PARTE 5: Mathematical Functions', () => {
     });
 
     // Functions with constants
-    test('sin(PI/2) = 1', () => {
-        const result = parseFloat(evalExpression('sin(PI/2)'));
-        expect(result).toBeCloseTo(1, 4);
+    test('sin(180/2) = 1', () => {
+        expect(evalExpression('sin(180/2)')).toBe('1');
+       ;
     });
 
-    test('cos(PI) = -1', () => {
-        const result = parseFloat(evalExpression('cos(PI)'));
-        expect(result).toBeCloseTo(-1, 4);
+    test('cos(180) = -1', () => {
+      expect(evalExpression('cos(180)')).toBe('-1');
     });
 
     test('log(E^2) = 2 (with E to power)', () => {
@@ -645,7 +644,7 @@ describe('PARTE 5: Mathematical Functions', () => {
         expect(parseFloat(result)).toBe(5);
     });
 });
-*/
+
 // ============================================================================
 // PARTE 6: FRACTIONS MODE (25 testes)
 // ============================================================================
@@ -740,6 +739,7 @@ describe('PARTE 6: Fraction Mode', () => {
 
     test('Whole number in frac mode: 5', () => {
         mathResolver.settings.positive_sign = true;
+        mathResolver.settings.frac_mode = false;
         expect(evalExpression('5')).toBe('+5');
     });
 
@@ -1452,6 +1452,18 @@ describe('PARTE 13: Settings Interactions & Errors', () => {
         expect(result1).not.toEqual(result2);
         expect(result2).toContain('+');
     });
+});
+
+test('Sen(180) must retur 0', () => {
+    console.log(Math.round(1.2246467991473532e-16));
+    mathResolver.settings.smart_to_fixed = true;
+    mathResolver.settings.always_return_sci_notation = false;
+    mathResolver.settings.frac_mode = false;
+    expect(evalExpression('sen(180)')).toBe('0');
+});
+
+test('Sen({[-2+3-{{-2}}]})^2 + cos({[-2+3-{{-2}}]})^2 = 1', () => {
+    expect(evalExpression('sen({[-2+3-{{-2}}]})^2 + cos({[-2+3-{{-2}}]})^2')).toBe('+1');
 });
 
 module.exports = {

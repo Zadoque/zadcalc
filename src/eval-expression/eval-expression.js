@@ -82,7 +82,7 @@ mathResolver.evalExpression = (expression) => {
     if (hasConstants(expression)) {
         try {
             expression = replaceConstants(expression);
-           
+
         } catch (error) {
             return `Error while trying to replace constants in ${expression}:\n\t ${error.message}`;
         }
@@ -116,11 +116,11 @@ mathResolver.evalExpression = (expression) => {
         return `Invalid Expression`;
     }
 
-    if (Number(expression) !== Math.floor(Number(expression))) {
+    if (Number(expression) !== Math.round(Number(expression))) {
         if (mathResolver.settings.frac_mode) {
             expression = decimalToFrac(expression);
         } else if (/^[+-]?\d+(\.\d+)?e[+-]?\d+$/.test(expression)) {
-            return expression;
+            return smartToFixed(expression);
         } else if (mathResolver.settings.always_return_sci_notation) {
             return toSciNotation(expression);
         } else if (mathResolver.settings.smart_to_fixed) {
@@ -131,9 +131,8 @@ mathResolver.evalExpression = (expression) => {
                 expression = `${Number(expression).toFixed(mathResolver.settings.to_fixed)}`;
             }
         }
-
     } else if (mathResolver.settings.always_return_sci_notation) {
-            expression =  toSciNotation(expression)
+        expression = toSciNotation(expression)
     }
     if (Number(expression) > 0 && expression[0] !== `+` && mathResolver.settings.positive_sign) {
         expression = `+${expression}`;

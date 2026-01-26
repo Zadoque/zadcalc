@@ -36,7 +36,7 @@ describe('smartToFixed – floating point normalization & identities', () => {
     test('identidades trigonométricas numéricas', () => {
         expect(smartToFixed('0.9999999999999999')).toBe('1');
         expect(smartToFixed('-0.9999999999999999')).toBe('-1');
-        expect(smartToFixed('6.123233995736766e-17')).toBe('6.12323399573677e-17');
+        expect(smartToFixed('6.123233995736766e-17')).toBe('0');
     });
 
     // ============================================================
@@ -59,8 +59,8 @@ describe('smartToFixed – floating point normalization & identities', () => {
     // ============================================================
 
     test('limites de precisão IEEE-754', () => {
-        expect(smartToFixed('9007199254740991')).toBe('9007199254740990'); // MAX_SAFE_INTEGER
-        expect(smartToFixed('9007199254740992')).toBe('9007199254740990');
+        expect(smartToFixed('9007199254740991')).toBe('9007199254740991'); // MAX_SAFE_INTEGER
+        expect(smartToFixed('9007199254740992')).toBe('9007199254740992');
     });
 
 
@@ -74,8 +74,8 @@ describe('smartToFixed – floating point normalization & identities', () => {
     });
 
     test('zero com ruído', () => {
-        expect(smartToFixed('1e-16')).toBe('1e-16');
-        expect(smartToFixed('-1e-16')).toBe('-1e-16');
+        expect(smartToFixed('1e-16')).toBe('0');
+        expect(smartToFixed('-1e-16')).toBe('0');
     });
 
     // ============================================================
