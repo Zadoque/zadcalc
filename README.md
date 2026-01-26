@@ -1,6 +1,4 @@
-Você tem razão! Aqui está o README completo em markdown puro:
 
-```markdown
 # zadcalc
 
 [![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://www.npmjs.com/package/zadcalc)
