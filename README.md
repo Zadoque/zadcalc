@@ -328,7 +328,9 @@ flowchart TD
     C -->|Yes| X[Return Settings Error]
     C -->|No| D{LaTeX Format?}
     D -->|Yes| D1[Convert LaTeX to zadcalc format]
-    D1 --> E[Replace Constants]
+    D1 --> V{Has constants?}
+    V --> |Yes|E[Replace Constants]
+    V --> |No|E
     D -->|No| E
     E --> F{Valid Expression?}
     F -->|No| Y[Return Syntax Error]
