@@ -1,4 +1,3 @@
-
 # zadcalc
 
 [![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://www.npmjs.com/package/zadcalc)
@@ -19,6 +18,7 @@ A powerful JavaScript library for evaluating mathematical expressions with suppo
 - 📝 LaTeX input support
 - 🎨 Customizable output formatting
 - ⚡ Exponentiation and root extraction
+- 📦 CommonJS and ES6 module support
 
 ## Prerequisites
 
@@ -47,6 +47,7 @@ npm install zadcalc
 
 ## Getting Started
 
+### Using CommonJS (Node.js default)
 ```javascript
 const mathResolver = require('zadcalc');
 
@@ -55,6 +56,18 @@ console.log(mathResolver.evalExpression('2+2'));        // "4"
 console.log(mathResolver.evalExpression('sin(30)'));    // "0.5"
 console.log(mathResolver.evalExpression('sqrt(16)'));   // "4"
 ```
+
+### Using ES6 Modules
+```javascript
+import mathResolver from 'zadcalc';
+
+// Basic calculations
+console.log(mathResolver.evalExpression('2+2'));        // "4"
+console.log(mathResolver.evalExpression('sin(30)'));    // "0.5"
+console.log(mathResolver.evalExpression('sqrt(16)'));   // "4"
+```
+
+> **Note**: To use ES6 imports, make sure your `package.json` has `"type": "module"` or use the `.mjs` file extension.
 
 ## Usage Examples
 
@@ -195,6 +208,46 @@ mathResolver.settings.to_fixed = 3;
 console.log(mathResolver.evalExpression('1000000'));         // "1.000e+6"
 ```
 
+## Module System Support
+
+zadcalc supports both CommonJS and ES6 module systems out of the box.
+
+### CommonJS (require)
+The traditional Node.js way:
+
+```javascript
+const mathResolver = require('zadcalc');
+console.log(mathResolver.evalExpression('2+2'));  // "4"
+```
+
+### ES6 Modules (import)
+Modern JavaScript syntax:
+
+```javascript
+import mathResolver from 'zadcalc';
+console.log(mathResolver.evalExpression('2+2'));  // "4"
+```
+
+**To use ES6 imports in Node.js:**
+
+1. Add `"type": "module"` to your `package.json`:
+   ```json
+   {
+     "type": "module",
+     "dependencies": {
+       "zadcalc": "^3.0.0"
+     }
+   }
+   ```
+
+2. Or use the `.mjs` extension for your files:
+   ```bash
+   # Your file: calculator.mjs
+   import mathResolver from 'zadcalc';
+   ```
+
+The package automatically detects which module system you're using and loads the appropriate version.
+
 ## Supported Functions
 
 ### Trigonometric Functions (Degrees)
@@ -322,7 +375,7 @@ mathResolver.evalExpression('1/2')
 Below is a flowchart explaining how zadcalc processes expressions:
 
 ```mermaid
-    flowchart TD
+flowchart TD
     A[Your Math Expression] --> B[evalExpression]
     B --> C{Settings Conflict?}
     C -->|Yes| D[Return Settings Error]
@@ -332,7 +385,7 @@ Below is a flowchart explaining how zadcalc processes expressions:
     F --> G
     G --> |Yes| H{Are the functions valid?}
     H --> |Yes|I[Resolve Functions]
-    I --> I1[Resolve Implicity Multiplication]
+    I --> I1[Resolve Implicit Multiplication]
     I1 --> J{Is the expression valid?}
     H --> |No| K[Return error in function]
     G --> |No| I1
@@ -356,6 +409,7 @@ Below is a flowchart explaining how zadcalc processes expressions:
 - 📐 Complete set of trigonometric and hyperbolic functions
 - 🔢 Improved fraction mode with repeating decimal support
 - 🎯 Domain validation for all mathematical functions
+- 📦 Native ES6 module support with automatic detection
 
 ### Behavior Changes
 - Trigonometric functions now work exclusively in **degrees** (radian mode coming in future update)
