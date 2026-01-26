@@ -322,39 +322,30 @@ mathResolver.evalExpression('1/2')
 Below is a flowchart explaining how zadcalc processes expressions:
 
 ```mermaid
-flowchart TD
+    flowchart TD
     A[Your Math Expression] --> B[evalExpression]
     B --> C{Settings Conflict?}
-    C -->|Yes| X[Return Settings Error]
-    C -->|No| D{LaTeX Format?}
-    D -->|Yes| D1[Convert LaTeX to zadcalc format]
-    D1 --> V{Has constants?}
-    V --> |Yes|E[Replace Constants]
-    V --> |No|E
-    D -->|No| E
-    E --> F{Valid Expression?}
-    F -->|No| Y[Return Syntax Error]
-    F -->|Yes| G{Has Functions?}
-    G -->|Yes| H[Resolve Functions]
-    H --> I{Has Brackets?}
-    G -->|No| I
-    I -->|Yes| J[Remove Unnecessary]
-    J --> K{Still Has Brackets?}
-    K -->|Yes| L[Simplify]
-    L --> M[Resolve Operations]
-    K -->|No| M
-    I -->|No| M
-    M --> N{Division by Zero?}
-    N -->|Yes| Z[Return Division Error]
-    N -->|No| O{Domain Error?}
-    O -->|Yes| W[Return Domain Error]
-    O -->|No| P[Apply Settings]
-    P --> Q{Frac Mode?}
-    Q -->|Yes| R[Convert to Fraction]
-    Q -->|No| S[Format Number]
-    R --> T[Return Result]
-    S --> T
-    T --> U[End]
+    C -->|Yes| D[Return Settings Error]
+    C --> |No| E{Has constants?}
+    E -->|Yes| F[Replace Constants]
+    E --> |No| G{HasFunctions?}
+    F --> G
+    G --> |Yes| H{Are the functions valid?}
+    H --> |Yes|I[Resolve Functions]
+    I --> I1[Resolve Implicity Multiplication]
+    I1 --> J{Is the expression valid?}
+    H --> |No| K[Return error in function]
+    G --> |No| I1
+    J--> |Yes| L{Has Brackets or parentheses?}
+    J --> |No| M[Return Error]
+    L --> |Yes| N[Remove Unnecessary]
+    L --> |No| O[Resolve]
+    N --> P{Still has brackets or parentheses?}
+    P --> |Yes| Q[Simplify]
+    P --> |No| O
+    Q --> O
+    O --> R[Apply Settings]
+    R --> S[END]
 ```
 
 ## Breaking Changes in v3.0.0
