@@ -1,1 +1,1 @@
-const smartToFixed=r=>{if(null==r)return r;const t=parseFloat(r);return Number.isNaN(t)?r:parseFloat(t.toPrecision(15)).toString()};module.exports=smartToFixed;
+const smartToFixed=t=>{if(null==t)return t;const r=parseFloat(t);return Number.isNaN(r)?t:Math.abs(Math.round(r)-r)<1e-10?Math.round(r).toString():parseFloat(r.toPrecision(15)).toString()};module.exports=smartToFixed;
